@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/bienvenidda/menu.unity
     guid: 534e90f11cfc0fc4395294b4ab6b3329
   - enabled: 1
     path: Assets/escenaCamara.unity
     guid: 2022448b9e6c24344886ae21a2991209
+  - enabled: 1
+    path: Assets/Escaneo/escaneo.unity
+    guid: aa672acecee9eed4fa7cde9ab124b6bd
