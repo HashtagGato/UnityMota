@@ -3,11 +3,11 @@ Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
 All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
-
 using UnityEngine;
 
 namespace Vuforia
 {
+	
     /// <summary>
     /// A custom handler that implements the ITrackableEventHandler interface.
     /// </summary>
@@ -16,7 +16,8 @@ namespace Vuforia
     {
         #region PRIVATE_MEMBER_VARIABLES
  
-        private TrackableBehaviour mTrackableBehaviour;
+		private TrackableBehaviour mTrackableBehaviour;
+		private Canvas cbut;
     
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -26,11 +27,14 @@ namespace Vuforia
     
         void Start()
         {
+
+			cbut = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
             if (mTrackableBehaviour)
             {
                 mTrackableBehaviour.RegisterTrackableEventHandler(this);
             }
+
         }
 
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
@@ -51,11 +55,13 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
-                OnTrackingFound();
+				OnTrackingFound();
+				cbut.enabled = true;
             }
             else
             {
-                OnTrackingLost();
+				OnTrackingLost();
+				cbut.enabled = false;
             }
         }
 
@@ -82,7 +88,6 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
@@ -102,8 +107,7 @@ namespace Vuforia
             foreach (Collider component in colliderComponents)
             {
                 component.enabled = false;
-            }
-
+			}
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
 
