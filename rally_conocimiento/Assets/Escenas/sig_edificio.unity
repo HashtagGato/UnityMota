@@ -1093,8 +1093,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1313996536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119, y: 114.5, z: 0}
-  m_LocalScale: {x: 0.2632544, y: 0.2632544, z: 0.2632544}
+  m_LocalPosition: {x: 110, y: 183, z: 0}
+  m_LocalScale: {x: 0.3199789, y: 0.3199789, z: 0.3199789}
   m_Children:
   - {fileID: 1592208356}
   - {fileID: 32538196}
@@ -1390,7 +1390,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1579237065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1032016822}
+        m_MethodName: botonEscanearCodigo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: escaneo
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1579237065
