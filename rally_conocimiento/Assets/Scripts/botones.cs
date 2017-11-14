@@ -1,24 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class botones : MonoBehaviour {
-    public void BotonJugar()
+
+
+	public void BotonJugar(string scene)
     {
-#pragma warning disable CS0618 // Type or member is obsolete
+		
         //Application.LoadLevel("escenaCamara");
-#pragma warning restore CS0618 // Type or member is obsolete
-        //Dirigirse a sig_edificio
+
+		Debug.Log ("cambio de escena: Siguiente edificio");
+		SceneManager.LoadScene (scene);
     }
 
-    public void BotonReanudar()
+	public void BotonReanudar(string scene)
     {
-        //Application.LoadLevel("hol");
+		Debug.Log ("cambio de escena: siguiente edificio");
+		SceneManager.LoadScene (scene);
     }
 
-    public void BotonSalir()
+	public void BotonSalir(string scene)
     {
-
+		//Dialogo de confirmacion
+		//si acepta, mandar siguiente funcion
+		Debug.Log ("cambio de escena: Salir");
+		SceneManager.LoadScene (scene);
     }
 }
 
