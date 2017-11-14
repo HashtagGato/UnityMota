@@ -14,11 +14,6 @@ public class sig_edificio : MonoBehaviour {
 	void Update () {
 		
 	}
-
-	public void botonEscanearCodigo(string scene){
-		Debug.Log ("cambio de escena: EscaneaCamara");
-		SceneManager.LoadScene (scene);
-	}
 	public void BotonSalir(string scene)
 	{
 		//Dialogo de confirmacion
