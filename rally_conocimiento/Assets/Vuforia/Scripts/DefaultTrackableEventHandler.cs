@@ -4,6 +4,7 @@ All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Vuforia
 {
@@ -17,7 +18,8 @@ namespace Vuforia
         #region PRIVATE_MEMBER_VARIABLES
  
 		private TrackableBehaviour mTrackableBehaviour;
-		private Canvas cbut;
+		private Canvas cResps, cPreg;
+		private Text tPreg, tResp1, tResp2, tResp3, tResp4;
     
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -28,7 +30,13 @@ namespace Vuforia
         void Start()
         {
 
-			cbut = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
+			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
+			cPreg = GameObject.Find ("CanvasPreg").GetComponent<Canvas> ();
+			tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
+			tResp1 = GameObject.Find ("TextA").GetComponent<Text> ();
+			tResp2 = GameObject.Find ("TextB").GetComponent<Text> ();
+			tResp3 = GameObject.Find ("TextC").GetComponent<Text> ();
+			tResp4 = GameObject.Find ("TextD").GetComponent<Text> ();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
             if (mTrackableBehaviour)
             {
@@ -56,12 +64,19 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
 				OnTrackingFound();
-				cbut.enabled = true;
+				cResps.enabled = true;
+				cPreg.enabled = true;
+				tResp1.text = "Resp A";//Asignar lo consumido por el webService, en cada una
+				tResp2.text = "Resp B";
+				tResp3.text = "Resp C";
+				tResp4.text = "Resp D";
+				tPreg.text = "Hola mi nombre es haruko y esta es tu siguiente pregunta, ¿cuántos años se toma para viajar a la luna?";
             }
             else
             {
 				OnTrackingLost();
-				cbut.enabled = false;
+				cResps.enabled = false;
+				cPreg.enabled = false;
             }
         }
 
@@ -88,7 +103,7 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+            Debug.Log("Trackable " + mTrackableBehaviour.name + " found");
         }
 
 

@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class Movs : MonoBehaviour {
 
 	Animator anim;
-	Text tA, tB, tC, tD;
+	Text tA, tB, tC, tD, tPreg;
+	Canvas cSig, cResps;
+	string[] btnsResps = {"A","B","C","D"};
+	int resp = 2;//sustituir por lo que regresa el ws
 	// Use this for initialization
 	void Start () {
 		anim = GameObject.Find ("Haruko").GetComponent<Animator> ();
-		tA = GameObject.Find ("TextA").GetComponent<Text> ();
+		cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
+		cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
+		tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
 	}
 	
 	// Update is called once per frame
@@ -18,9 +23,21 @@ public class Movs : MonoBehaviour {
 		
 	}
 
-	public void enviarResp(){
-		Debug.Log ("hola");
-		tA.text = "Se hizo clic";
-		anim.Play ("kick");
+	public void enviarResp(string pTextName){
+		tA = GameObject.Find (pTextName).GetComponent<Text> ();
+		pTextName = pTextName.Replace ("Text", "");
+		tA.text = btnsResps [resp];
+		Debug.Log (name+"y "+btnsResps[resp]);
+		if (pTextName.Equals (btnsResps [resp])) {
+			tPreg.text = "¡Respuesta correcta!";
+			anim.Play ("jump");
+			cResps.enabled = false;
+			cSig.enabled = true;
+		} else {
+			tPreg.text = "¡Respuesta incorrecta!";
+			anim.Play ("kick");
+			cResps.enabled = false;
+			cSig.enabled = true;
+		}
 	}
 }
