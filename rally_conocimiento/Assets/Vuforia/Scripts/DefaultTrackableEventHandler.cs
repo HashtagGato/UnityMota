@@ -18,7 +18,7 @@ namespace Vuforia
         #region PRIVATE_MEMBER_VARIABLES
  
 		private TrackableBehaviour mTrackableBehaviour;
-		private Canvas cResps, cPreg;
+		private Canvas cResps, cPreg, cSig;
 		private Text tPreg, tResp1, tResp2, tResp3, tResp4;
     
         #endregion // PRIVATE_MEMBER_VARIABLES
@@ -32,6 +32,7 @@ namespace Vuforia
 
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
 			cPreg = GameObject.Find ("CanvasPreg").GetComponent<Canvas> ();
+			cPreg = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 			tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
 			tResp1 = GameObject.Find ("TextA").GetComponent<Text> ();
 			tResp2 = GameObject.Find ("TextB").GetComponent<Text> ();
@@ -77,6 +78,7 @@ namespace Vuforia
 				OnTrackingLost();
 				cResps.enabled = false;
 				cPreg.enabled = false;
+				cSig.enabled = false;
             }
         }
 
