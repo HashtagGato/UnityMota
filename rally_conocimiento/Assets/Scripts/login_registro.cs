@@ -32,21 +32,49 @@ public class login_registro : MonoBehaviour {
 		url.AddField ("nombre",user);
 		url.AddField ("contra",pass);//Cifrar contraseña
 		using (UnityWebRequest www = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/login", url)){
-			yield return www.Send ();
+			yield return www.SendWebRequest ();
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
 			} else {
-				Debug.Log ("No regresa error pero aun no se como sacar el valor...rashos");
+				string json = www.downloadHandler.text;
+				if (!json.Equals("[]")) {
+					CambiarEscena("menu");
+				} else {
+					usuario.text = "Usuario no encontrado";
+				}
 			}
 		}
-		//Cambio a Bienvenida/Menu
-		//CambiarEscena ("menu");
 	}
+
     public void Register()
     {
-
+		//StartCoroutine ("StartGet");
     }
-
+	private IEnumerator StartGet(){
+		//Recupera el text de los iInput Field y los guarda en variables
+		string user = "";
+		string pass = "";
+		user = usuario.text;
+		pass = password.text;
+		//Validacion de datos en el web service //?nombre=USER&contraPASS
+		WWWForm url = new WWWForm();
+		url.AddField ("nombre",user);
+		url.AddField ("contra",pass);//Cifrar contraseña
+		using (UnityWebRequest www = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/nuevoUsuario", url)){
+			yield return www.SendWebRequest ();
+			if (www.isNetworkError || www.isHttpError) {
+				Debug.Log (www.error);
+			} else {
+				string json = www.downloadHandler.text;
+				if (!json.Equals("")) {
+					Debug.Log ("Usuario Registrado correctamente");
+					CambiarEscena("menu");
+				} else {
+					usuario.text = "Usuario no encontrado";
+				}
+			}
+		}
+	}
 	public void CambiarEscena(string scene){
 		Debug.Log ("cambio de escena");
 		SceneManager.LoadScene (scene);
