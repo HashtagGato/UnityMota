@@ -12,7 +12,8 @@ public class Movs : MonoBehaviour {
 	int resp = 2;//sustituir por lo que regresa el ws
 	// Use this for initialization
 	void Start () {
-		anim = GameObject.Find ("Haruko").GetComponent<Animator> ();
+        Screen.orientation = ScreenOrientation.Landscape;
+        anim = GameObject.Find ("Haruko").GetComponent<Animator> ();
 		cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 		cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
 		tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
