@@ -10,8 +10,10 @@ public class login_registro : MonoBehaviour {
 	public InputField usuario;
 	public InputField password;
 	void Start(){
-		//obtiene el objeto especificado por el nombre
-		GameObject inputFieldU = GameObject.Find ("Usuario");
+        Screen.orientation = ScreenOrientation.Portrait;
+
+        //obtiene el objeto especificado por el nombre
+        GameObject inputFieldU = GameObject.Find ("Usuario");
 		GameObject inputFieldP = GameObject.Find ("Password");
 		//Ontiene el componente del objeto 
 		usuario = inputFieldU.GetComponent<InputField> ();

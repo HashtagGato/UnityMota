@@ -10,7 +10,8 @@ public class inicioEscaneo : MonoBehaviour{
 
 	// Use this for initialization
 	void Start () {
-		string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
+        Screen.orientation = ScreenOrientation.Portrait;
+        string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
 		but = GameObject.Find ("CanvasResp");
 		cbut = but.GetComponent<Canvas> ();
 		for(int i=0; i<nEdificios.Length;i++){

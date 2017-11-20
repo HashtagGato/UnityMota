@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class botones : MonoBehaviour {
 
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
 
-	public void BotonJugar(string scene)
+    public void BotonJugar(string scene)
     {
 		
         //Application.LoadLevel("escenaCamara");
