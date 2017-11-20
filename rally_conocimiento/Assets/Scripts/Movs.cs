@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Vuforia;
 
 public class Movs : MonoBehaviour {
-
+	private TrackableBehaviour mTrackableBehaviour;
 	Animator anim;
 	Text tA, tB, tC, tD, tPreg;
 	Canvas cSig, cResps;
 	string[] btnsResps = {"A","B","C","D"};
+	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
+	string sName, sPreg;
 	int resp = 2;//sustituir por lo que regresa el ws
 	// Use this for initialization
 	void Start () {
-        Screen.orientation = ScreenOrientation.Landscape;
-        anim = GameObject.Find ("Haruko").GetComponent<Animator> ();
+		Screen.orientation = ScreenOrientation.Landscape;
+		string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
+		anim = GameObject.Find ("Haruko"+nEdificio).GetComponent<Animator> ();
 		cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 		cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
-		tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
+		tPreg = GameObject.Find ("preguntaText"+nEdificio).GetComponent<Text> ();
 	}
 	
 	// Update is called once per frame
@@ -25,10 +29,8 @@ public class Movs : MonoBehaviour {
 	}
 
 	public void enviarResp(string pTextName){
-		tA = GameObject.Find (pTextName).GetComponent<Text> ();
 		pTextName = pTextName.Replace ("Text", "");
-		tA.text = btnsResps [resp];
-		Debug.Log (name+"y "+btnsResps[resp]);
+
 		if (pTextName.Equals (btnsResps [resp])) {
 			tPreg.text = "¡Respuesta correcta!";
 			anim.Play ("jump");

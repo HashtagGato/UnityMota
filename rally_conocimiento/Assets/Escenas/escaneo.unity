@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658017, g: 0.49641502, b: 0.57482153, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 11195793}
   - component: {fileID: 11195792}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 22797172}
   - component: {fileID: 22797171}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 24517598}
   - component: {fileID: 24517597}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextAC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 48396854}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 134.58475, y: -220.15976, z: 0}
+  m_LocalPosition: {x: 25.98291, y: -28.533333, z: 0}
   m_LocalScale: {x: 1.3230699, y: 1.3230699, z: 1.3230699}
   m_Children:
   - {fileID: 14714321}
@@ -765,6 +765,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoJ
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -1094,7 +1098,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 192908763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 134.58475, y: -36.579376, z: 0}
+  m_LocalPosition: {x: 25.98291, y: -3, z: 0}
   m_LocalScale: {x: 1.3230699, y: 1.3230699, z: 1.3230699}
   m_Children:
   - {fileID: 1547353729}
@@ -1206,7 +1210,7 @@ GameObject:
   - component: {fileID: 246457327}
   - component: {fileID: 246457326}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextS3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1404,6 +1408,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoCH
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -1543,6 +1551,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoH
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -1558,7 +1570,7 @@ GameObject:
   - component: {fileID: 304084729}
   - component: {fileID: 304084728}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregAF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1655,7 +1667,7 @@ GameObject:
   - component: {fileID: 327945761}
   - component: {fileID: 327945760}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextAG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2058,7 +2070,7 @@ GameObject:
   - component: {fileID: 413484075}
   - component: {fileID: 413484074}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2180,6 +2192,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoD
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -2198,7 +2214,7 @@ GameObject:
   - component: {fileID: 448253245}
   - component: {fileID: 448253244}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextCH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2276,7 +2292,7 @@ GameObject:
   - component: {fileID: 455799290}
   - component: {fileID: 455799289}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2551,7 +2567,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504868731}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -144.96603, y: -220.15976, z: 0}
+  m_LocalPosition: {x: -27.987122, y: -28.533333, z: 0}
   m_LocalScale: {x: 1.3230699, y: 1.3230699, z: 1.3230699}
   m_Children:
   - {fileID: 255154018}
@@ -2659,7 +2675,7 @@ GameObject:
   - component: {fileID: 516414107}
   - component: {fileID: 516414106}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2785,6 +2801,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoAF
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -2847,6 +2867,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoZ
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -2971,6 +2995,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoA
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -3151,6 +3179,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoR
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -3165,7 +3197,7 @@ GameObject:
   - component: {fileID: 649853205}
   - component: {fileID: 649853204}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3308,7 +3340,7 @@ GameObject:
   - component: {fileID: 653503732}
   - component: {fileID: 653503731}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3383,7 +3415,7 @@ GameObject:
   - component: {fileID: 663863679}
   - component: {fileID: 663863678}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3572,6 +3604,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoL
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -3748,6 +3784,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoAG
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -3892,6 +3932,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoAC
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -4032,7 +4076,7 @@ GameObject:
   - component: {fileID: 855952269}
   - component: {fileID: 855952268}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4351,7 +4395,7 @@ GameObject:
   - component: {fileID: 979848089}
   - component: {fileID: 979848088}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4675,6 +4719,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoPE
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -5534,6 +5582,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoS2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -5549,7 +5601,7 @@ GameObject:
   - component: {fileID: 1165083348}
   - component: {fileID: 1165083347}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5756,7 +5808,7 @@ GameObject:
   - component: {fileID: 1167935454}
   - component: {fileID: 1167935453}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5831,7 +5883,7 @@ GameObject:
   - component: {fileID: 1186585716}
   - component: {fileID: 1186585715}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6115,7 +6167,7 @@ GameObject:
   - component: {fileID: 1315742868}
   - component: {fileID: 1315742867}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6209,7 +6261,7 @@ GameObject:
   - component: {fileID: 1330778501}
   - component: {fileID: 1330778500}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6422,7 +6474,7 @@ GameObject:
   - component: {fileID: 1386000249}
   - component: {fileID: 1386000248}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregAG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6515,7 +6567,7 @@ GameObject:
   - component: {fileID: 1391233710}
   - component: {fileID: 1391233709}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6653,7 +6705,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RMaterial
+  m_Name: ZMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -6843,7 +6895,7 @@ GameObject:
   - component: {fileID: 1535904346}
   - component: {fileID: 1535904345}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6921,7 +6973,7 @@ GameObject:
   - component: {fileID: 1546282570}
   - component: {fileID: 1546282569}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextAF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7143,7 +7195,7 @@ GameObject:
   - component: {fileID: 1624191277}
   - component: {fileID: 1624191276}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextS2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7349,6 +7401,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoT
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -7411,6 +7467,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoF
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -7426,7 +7486,7 @@ GameObject:
   - component: {fileID: 1701750892}
   - component: {fileID: 1701750891}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregS2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7519,7 +7579,7 @@ GameObject:
   - component: {fileID: 1710020825}
   - component: {fileID: 1710020824}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7670,7 +7730,7 @@ GameObject:
   - component: {fileID: 1739277069}
   - component: {fileID: 1739277068}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7912,7 +7972,7 @@ GameObject:
   - component: {fileID: 1756235970}
   - component: {fileID: 1756235969}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8053,6 +8113,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoK
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -8067,7 +8131,7 @@ GameObject:
   - component: {fileID: 1761990186}
   - component: {fileID: 1761990185}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8141,7 +8205,7 @@ GameObject:
   - component: {fileID: 1763082187}
   - component: {fileID: 1763082186}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8220,7 +8284,7 @@ GameObject:
   - component: {fileID: 1781322452}
   - component: {fileID: 1781322451}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8314,7 +8378,7 @@ GameObject:
   - component: {fileID: 1839178049}
   - component: {fileID: 1839178048}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8455,6 +8519,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoU
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -8525,6 +8593,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoP
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -8591,6 +8663,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoY
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0
@@ -8606,7 +8682,7 @@ GameObject:
   - component: {fileID: 1917337711}
   - component: {fileID: 1917337710}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregCH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8952,7 +9028,7 @@ GameObject:
   - component: {fileID: 1998359609}
   - component: {fileID: 1998359608}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9045,7 +9121,7 @@ GameObject:
   - component: {fileID: 2010023759}
   - component: {fileID: 2010023758}
   m_Layer: 0
-  m_Name: preguntaText
+  m_Name: preguntaTextL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9120,7 +9196,7 @@ GameObject:
   - component: {fileID: 2012715216}
   - component: {fileID: 2012715215}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9507,7 +9583,7 @@ GameObject:
   - component: {fileID: 2063313874}
   - component: {fileID: 2063313873}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9601,7 +9677,7 @@ GameObject:
   - component: {fileID: 2064080949}
   - component: {fileID: 2064080948}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregAC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9708,8 +9784,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2074515180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120.5, y: 179.5, z: 0}
-  m_LocalScale: {x: 0.46527424, y: 0.46527424, z: 0.46527424}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2103723334}
   - {fileID: 504868732}
@@ -9805,7 +9881,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2103723333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -144.96603, y: -38.579376, z: 0}
+  m_LocalPosition: {x: -27.987122, y: -5, z: 0}
   m_LocalScale: {x: 1.3230714, y: 1.3230708, z: 1.3230708}
   m_Children:
   - {fileID: 753032303}
@@ -9914,7 +9990,7 @@ GameObject:
   - component: {fileID: 2138294340}
   - component: {fileID: 2138294339}
   m_Layer: 0
-  m_Name: CanvasPreg
+  m_Name: CanvasPregS3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10055,6 +10131,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+    - target: {fileID: 100044, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
+      propertyPath: m_Name
+      value: HarukoS3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
   m_IsPrefabParent: 0

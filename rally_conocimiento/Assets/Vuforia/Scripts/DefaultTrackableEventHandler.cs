@@ -19,7 +19,7 @@ namespace Vuforia
  
 		private TrackableBehaviour mTrackableBehaviour;
 		private Canvas cResps, cPreg, cSig;
-		private Text tPreg, tResp1, tResp2, tResp3, tResp4;
+		private string sName;
     
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -30,20 +30,15 @@ namespace Vuforia
         void Start()
         {
 
-			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
-			cPreg = GameObject.Find ("CanvasPreg").GetComponent<Canvas> ();
-			cPreg = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
-			tPreg = GameObject.Find ("preguntaText").GetComponent<Text> ();
-			tResp1 = GameObject.Find ("TextA").GetComponent<Text> ();
-			tResp2 = GameObject.Find ("TextB").GetComponent<Text> ();
-			tResp3 = GameObject.Find ("TextC").GetComponent<Text> ();
-			tResp4 = GameObject.Find ("TextD").GetComponent<Text> ();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
+			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
+			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
+			cPreg = GameObject.Find (sName).GetComponent<Canvas> ();
+			cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
             if (mTrackableBehaviour)
             {
                 mTrackableBehaviour.RegisterTrackableEventHandler(this);
             }
-
         }
 
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
@@ -67,11 +62,6 @@ namespace Vuforia
 				OnTrackingFound();
 				cResps.enabled = true;
 				cPreg.enabled = true;
-				tResp1.text = "Resp A";//Asignar lo consumido por el webService, en cada una
-				tResp2.text = "Resp B";
-				tResp3.text = "Resp C";
-				tResp4.text = "Resp D";
-				tPreg.text = "Hola mi nombre es haruko y esta es tu siguiente pregunta, ¿cuántos años se toma para viajar a la luna?";
             }
             else
             {
@@ -105,7 +95,7 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-            Debug.Log("Trackable " + mTrackableBehaviour.name + " found");
+			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
 
