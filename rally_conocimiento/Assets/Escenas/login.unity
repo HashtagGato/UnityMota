@@ -843,8 +843,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1834852214}
-        m_MethodName: CambiarEscena
-        m_Mode: 5
+        m_MethodName: Register
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -970,8 +970,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1065940149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120.5, y: 179.5, z: 0}
-  m_LocalScale: {x: 0.33168447, y: 0.33168447, z: 0.33168447}
+  m_LocalPosition: {x: 204.5, y: 175, z: 0}
+  m_LocalScale: {x: 0.4266435, y: 0.4266435, z: 0.4266435}
   m_Children:
   - {fileID: 1789385642}
   - {fileID: 1722024774}
@@ -1327,6 +1327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usuario: {fileID: 0}
   password: {fileID: 0}
+  user: 
+  pass: 
 --- !u!1 &1850798628
 GameObject:
   m_ObjectHideFlags: 0
