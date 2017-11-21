@@ -10,7 +10,7 @@ public class sig_edificio : MonoBehaviour {
 	Image aux;
 	Text tAux;
 	int rutaAct;
-	string[] rutaTot = {"A","Z","K","L","J","AC","AF","H","Y","R"};
+	string[] rutaTot = {"A","Z","K","L","J","AC","AF","H","Y","R"};//de alguna forma se debe sacar del web service un arreglo, aunque hagamos un split de lo que manda.
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class sig_edificio : MonoBehaviour {
 		cSig = GameObject.Find ("sig_edificio").GetComponent<Canvas> ();
 		cSig.enabled = true;
 		cMapa.enabled = false;
-		rutaAct = 2;
+		rutaAct = 2;//Se debe jalar del ws
 		if (rutaAct != 0) {
 			for (int i = 0; i < nEdificios.Length; i++) {
 				aux = GameObject.Find (nEdificios [i]).GetComponent<Image> ();
