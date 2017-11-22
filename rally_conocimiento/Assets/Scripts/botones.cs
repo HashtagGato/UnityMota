@@ -16,10 +16,10 @@ public class botones : MonoBehaviour {
 	private int[] recorridos = new int[2];
     private void Start()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
+		Screen.orientation = ScreenOrientation.Portrait;
 		reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
 		//Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
-		usuario = "Hanna";//Debe cambiarse a variable que pase entre escenas
+		usuario = "hola";//Debe cambiarse a variable que pase entre escenas
 		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
 		nUsuario.text = usuario;
 		StartCoroutine("startID");//Buscar el ID del usuario obtenido
@@ -51,8 +51,8 @@ public class botones : MonoBehaviour {
 		if (www.error == null) {
 			bool b = Processjson (www.text);
 			if (b == false) {
-				
 				Debug.Log("Deshabilitado");
+				reanudar.enabled = false;
 				//cambiar el color o deshabilitar
 			}
 		} else {
