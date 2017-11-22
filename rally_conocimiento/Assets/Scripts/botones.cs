@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 
 public class botones : MonoBehaviour {
@@ -11,12 +12,16 @@ public class botones : MonoBehaviour {
 	private string idUsuario;
 	private string usuario;
 	private string idPartida;
+	private Text nUsuario;
+	private int[] recorridos = new int[2];
     private void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
 		reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
 		//Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
 		usuario = "Hanna";//Debe cambiarse a variable que pase entre escenas
+		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
+		nUsuario.text = usuario;
 		StartCoroutine("startID");//Buscar el ID del usuario obtenido
 		StartCoroutine("startPartida");//Verificar si el usuario tiene una partida activa
 
@@ -120,7 +125,30 @@ public class botones : MonoBehaviour {
 		Debug.Log ("cambio de escena: Salir");
 		SceneManager.LoadScene (scene);
     }
-
+	/*public string calcularRuta(){
+		int numero;
+		int cont = 0;
+		string ruta = "";
+		while(cont < 20){
+			numero = Numero();
+			ruta+=numero+",";
+			cont++;
+		}
+		return ruta;
+	}
+	public int Numero(){
+		System.Random random = System.Random;
+		int num = random.Next(1, 20);
+		if(num == recorridos[0] | num == recorridos[1])
+		{
+			num = Numero();
+		} else
+		{
+			recorridos[1] = recorridos[0];
+			recorridos[0] = num;
+		}
+		return num;
+	}*/
 
 }
 

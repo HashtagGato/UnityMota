@@ -9,6 +9,7 @@ public class login_registro : MonoBehaviour {
 	//Objetos de tipo InputField para recibir datos
 	public InputField usuario;
 	public InputField password;
+	public Text error;
 	public string user="";
 	public string pass="";
 	void Start(){
@@ -17,6 +18,7 @@ public class login_registro : MonoBehaviour {
         //obtiene el objeto especificado por el nombre
         GameObject inputFieldU = GameObject.Find ("Usuario");
 		GameObject inputFieldP = GameObject.Find ("Password");
+		error = GameObject.Find ("Error").GetComponent<Text>();
 		//Ontiene el componente del objeto 
 		usuario = inputFieldU.GetComponent<InputField> ();
 		password = inputFieldP.GetComponent<InputField> ();
@@ -42,6 +44,8 @@ public class login_registro : MonoBehaviour {
 				if (!json.Equals("[]")) {
 					CambiarEscena("menu");
 				} else {
+					error.text = "Usuario no encontrado";
+					error.color = Color.red;
 					Debug.Log ("Usuario no encontrado");
 				}
 			}
@@ -66,7 +70,9 @@ public class login_registro : MonoBehaviour {
 			} else {
 				string json = www.downloadHandler.text;
 				if (!json.Equals("[]")) {
-					Debug.Log ("El usuario ya existe");
+					error.text = "Usuario invalido. Vuelve a ingresar tus datos";
+					error.color = Color.red;
+					Debug.Log ("Usuario no encontrado");
 				} else {
 					int tipo = 0;
 					//Registro de usuario //?nombre=USER&contraPASS
@@ -85,7 +91,8 @@ public class login_registro : MonoBehaviour {
 								Debug.Log (json);
 								StartCoroutine ("startPost");
 							} else {
-								usuario.text = "Error al registrar el usuario";
+								error.text = "El usuario ya existe";
+									error.color = Color.red;
 							}
 						}
 					}
