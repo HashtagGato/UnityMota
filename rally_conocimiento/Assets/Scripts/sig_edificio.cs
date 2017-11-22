@@ -10,7 +10,9 @@ public class sig_edificio : MonoBehaviour {
 	Image aux;
 	Text tAux;
 	int rutaAct;
+	//
 	string[] rutaTot = {"A","Z","K","L","J","AC","AF","H","Y","R"};//de alguna forma se debe sacar del web service un arreglo, aunque hagamos un split de lo que manda.
+	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
 	// Use this for initialization
 	void Start () {

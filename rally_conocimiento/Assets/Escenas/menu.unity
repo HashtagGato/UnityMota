@@ -1143,7 +1143,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1569840229}
         m_MethodName: BotonJugar
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1364,8 +1364,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1480701906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120.5, y: 179.5, z: 0}
-  m_LocalScale: {x: 0.30639696, y: 0.30639696, z: 0.30639696}
+  m_LocalPosition: {x: 204.5, y: 175, z: 0}
+  m_LocalScale: {x: 0.39411634, y: 0.39411634, z: 0.39411634}
   m_Children:
   - {fileID: 1505132391}
   - {fileID: 1721620724}
