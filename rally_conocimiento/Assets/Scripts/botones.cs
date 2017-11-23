@@ -61,6 +61,7 @@ public class botones : MonoBehaviour {
 	}
 
 	private bool Processjson(string json){
+		//Validacion si el usuario tiene partida sin terminar en la base de datos
 		bool bandera = false;
 		string[] jsonString = json.Split ('[');
 		jsonString =  jsonString[1].Split (']');
@@ -92,7 +93,7 @@ public class botones : MonoBehaviour {
 		StartCoroutine("startNuevaRuta");
     }
 	private IEnumerator startNuevaRuta(){
-		string ruta = "6,2,1,5,4,1,7,9,8,5"; //Ruta estatica para fines de avance, se debe generar de manera dinamica y aleatoria
+		string ruta = calcularRuta(); //Se debe generar de manera dinamica y aleatoria
 		WWWForm url = new WWWForm();
 		url.AddField ("ruta",ruta);
 		url.AddField ("id_usuario",idUsuario);//Cifrar contraseña
@@ -125,20 +126,26 @@ public class botones : MonoBehaviour {
 		Debug.Log ("cambio de escena: Salir");
 		SceneManager.LoadScene (scene);
     }
-	/*public string calcularRuta(){
+	private string calcularRuta(){
 		int numero;
 		int cont = 0;
 		string ruta = "";
 		while(cont < 20){
 			numero = Numero();
-			ruta+=numero+",";
+			if(cont < 19)
+			{
+				ruta += numero + ",";
+			} else
+			{
+				ruta += numero;
+			}
+
 			cont++;
 		}
 		return ruta;
 	}
-	public int Numero(){
-		System.Random random = System.Random;
-		int num = random.Next(1, 20);
+	private int Numero(){
+		int num = UnityEngine.Random.Range(1, 21);
 		if(num == recorridos[0] | num == recorridos[1])
 		{
 			num = Numero();
@@ -148,7 +155,7 @@ public class botones : MonoBehaviour {
 			recorridos[0] = num;
 		}
 		return num;
-	}*/
+	}	
 
 }
 
