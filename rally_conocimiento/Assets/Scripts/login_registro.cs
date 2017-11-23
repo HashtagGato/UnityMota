@@ -12,6 +12,7 @@ public class login_registro : MonoBehaviour {
 	public Text error;
 	public string user="";
 	public string pass="";
+
 	void Start(){
         Screen.orientation = ScreenOrientation.Portrait;
 

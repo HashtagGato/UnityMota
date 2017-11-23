@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using Vuforia;
 
@@ -9,10 +10,14 @@ public class inicioEscaneo : MonoBehaviour{
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
+    private int numPregunta;
 
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+        StartCoroutine("startPregunta");
+
         string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
 		but = GameObject.Find ("CanvasResp");
 		cbut = but.GetComponent<Canvas> ();
@@ -42,5 +47,24 @@ public class inicioEscaneo : MonoBehaviour{
 			mImage.SetActive (false);
 		}
 	}
+
+    private IEnumerator startPregunta()
+    {
+        numPregunta = UnityEngine.Random.Range(1, 51);//Obtenemos un numero aleatorio para la pregunta
+
+        string url = string.Concat("https://artashadow.000webhostapp.com/index.php/getPregunta/", numPregunta.ToString());
+
+        WWW www = new WWW(url);
+        yield return www;
+        if(www.error == null)
+        {
+            string [] json = www.text.Split(':');
+            Debug.Log(json[1]);
+        } else
+        {
+            Debug.Log(string.Concat(www.error, " aqui marca el error"));
+        }
+        
+    }
 
 }
