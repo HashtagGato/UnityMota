@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -59,9 +60,23 @@ public class inicioEscaneo : MonoBehaviour{
         if(www.error == null)
         {
             string [] json = www.text.Split(':');
-            Debug.Log(json[1]);
+            string pregunta = json[1].Split(',')[1];
+
+            //cambio a utf8, esta es una prueba, la dejo para trabajar mas tarde --------------------------------------
+            System.Text.Encoding utf_8 = System.Text.Encoding.UTF8;
+
+            string s_unicode = "\u00bfCual es el disco m\u00e1s vendido de la historia?";
+            byte[] utf8_bytes = System.Text.Encoding.UTF8.GetBytes(s_unicode);
+
+            string dos = System.Text.Encoding.UTF8.GetString(utf8_bytes);
+            Debug.Log(dos); 
+
+            //----------------------------------------------------------------------------------------------------------
+
+            //Debug.Log(jsonUTF8);
         } else
         {
+            
             Debug.Log(string.Concat(www.error, " aqui marca el error"));
         }
         
