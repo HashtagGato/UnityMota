@@ -34,29 +34,16 @@ public class inicioEscaneo : MonoBehaviour{
     {
         numPregunta = UnityEngine.Random.Range(1, 51);//Obtenemos un numero aleatorio para la pregunta
 
-        string url = string.Concat("https://artashadow.000webhostapp.com/index.php/getPregunta/", numPregunta.ToString());
+        string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/", numPregunta.ToString());
 
         WWW www = new WWW(url);
         yield return www;
         if (www.error == null)
         {
-            System.Text.Encoding utf_8 = System.Text.Encoding.BigEndianUnicode;
-            string json = www.text; //json obtenido desde el WS
-                                    //byte[] utf8_bytes = System.Text.Encoding.UTF8.GetBytes(json.Replace("\"",""));
-                                    // byte[] utf8_bytes = System.Text.Encoding.BigEndianUnicode.GetBytes(json.Replace("\"", ""));
-                                    //string jsonUTF8 = System.Text.Encoding.BigEndianUnicode.GetString(utf8_bytes);//json codificado en UTF8
-
-            //string a = System.Text.Encoding.ASCII(json); 
-
+            string json = www.text.Replace("\"", ""); //json obtenido desde el WS
+                          
             string[] json_array = json.Split(':');
-
-
-            string pregunta = json_array[1].Split(',')[0];
-            string op1 = json_array[2].Split(',')[0];
-            string op2 = json_array[2].Split(',')[1];
-            string op3 = json_array[2].Split(',')[2];
-            string op4 = json_array[2].Split(',')[3];
-
+            
             string correcta = json_array[3].Split('}')[0];
 
             string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
@@ -87,19 +74,6 @@ public class inicioEscaneo : MonoBehaviour{
             //Debug.Log(jsonUTF8);
         } else
         {
-
-            //cambio a utf8, esta es una prueba, la dejo para trabajar mas tarde --------------------------------------
-            System.Text.Encoding utf_8 = System.Text.Encoding.BigEndianUnicode;
-
-            string s_unicode = "[{ \"pregunta\":\"\u00bfCual es el disco m\u00e1s vendido de la historia?\",\"respuesta\":\"Servicio de lavander\u00eda - Shakira,Thriller-Michael Jackson,Supernatural - Santana,Hotel California - Eagles \",\"respuesta_correcta\":\"1\"}]";
-            byte[] utf8_bytes = System.Text.Encoding.BigEndianUnicode.GetBytes(s_unicode.Replace("\"",""));
-
-            string dos = System.Text.Encoding.BigEndianUnicode.GetString(utf8_bytes);
-
-            string pregunta = dos.Split(':')[1].Split(',')[0];
-
-            Debug.Log(pregunta);
-
             Debug.Log(string.Concat(www.error, " aqui marca el error"));
         }
         

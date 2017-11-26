@@ -7,13 +7,33 @@ using UnityEngine.UI;
 
 public class login_registro : MonoBehaviour {
 	//Objetos de tipo InputField para recibir datos
-	public InputField usuario;
-	public InputField password;
-	public Text error;
+	private InputField usuario;
+	private InputField password;
+	private Text error;
 	public string user="";
 	public string pass="";
 
-	void Start(){
+    public static login_registro nameUser;
+    //public string name_user;
+
+    private void Awake()
+    {
+        if (nameUser == null)
+        {
+            nameUser = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("es el 1");
+            //user = usuario.text;
+        }
+        else if (nameUser != this)
+        {
+            Destroy(gameObject);
+            Debug.Log("se destruye");
+        }
+
+    }
+
+    void Start(){
         Screen.orientation = ScreenOrientation.Portrait;
 
         //obtiene el objeto especificado por el nombre
@@ -23,23 +43,25 @@ public class login_registro : MonoBehaviour {
 		//Ontiene el componente del objeto 
 		usuario = inputFieldU.GetComponent<InputField> ();
 		password = inputFieldP.GetComponent<InputField> ();
-	}
+        user = usuario.text;
+        pass = password.text;
+    }
 	public void Login()
     {
 		StartCoroutine ("startPost");
     }
 	private IEnumerator startPost(){
-		//Recupera el text de los iInput Field y los guarda en variables
-		user = usuario.text;
-		pass = password.text;
-		//Validacion de datos en el web service //?nombre=USER&contraPASS
-		WWWForm url = new WWWForm();
+        //Recupera el text de los iInput Field y los guarda en variables
+        user = usuario.text;
+        pass = password.text;
+        //Validacion de datos en el web service //?nombre=USER&contraPASS
+        WWWForm url = new WWWForm();
 		url.AddField ("nombre",user);
 		url.AddField ("contra",pass);//Cifrar contraseña
-		using (UnityWebRequest www = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/login", url)){
+		using (UnityWebRequest www = UnityWebRequest.Post("http://www.artashadow.xyz/index.php/login", url)){
 			yield return www.SendWebRequest ();
 			if (www.isNetworkError || www.isHttpError) {
-				Debug.Log (www.error);
+				//Debug.Log (www.error);
 			} else {
 				string json = www.downloadHandler.text;
 				if (!json.Equals("[]")) {
@@ -64,7 +86,7 @@ public class login_registro : MonoBehaviour {
 		WWWForm url = new WWWForm();
 		url.AddField ("nombre",user);
 		url.AddField ("contra",pass);//Cifrar contraseña
-		using (UnityWebRequest www = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/login", url)){
+		using (UnityWebRequest www = UnityWebRequest.Post("http://www.artashadow.xyz/index.php/login", url)){
 			yield return www.SendWebRequest ();
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
@@ -81,7 +103,7 @@ public class login_registro : MonoBehaviour {
 					url.AddField ("nombre",user);
 					url.AddField ("contra",pass);//Cifrar contraseña
 					url.AddField("tipo",tipo);
-					using (UnityWebRequest www2 = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/nuevoUsuario", url)){
+					using (UnityWebRequest www2 = UnityWebRequest.Post("http://www.artashadow.xyz/index.php/nuevoUsuario", url)){
 						yield return www2.SendWebRequest ();
 						if (www2.isNetworkError || www2.isHttpError) {
 							Debug.Log (www2.error);

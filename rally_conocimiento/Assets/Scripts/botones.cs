@@ -8,18 +8,33 @@ using System;
 
 
 public class botones : MonoBehaviour {
+
+    private login_registro loginRegistro;
+    private GameObject game_object;
 	private Button reanudar;
 	private string idUsuario;
 	private string usuario;
 	private string idPartida;
 	private Text nUsuario;
 	private int[] recorridos = new int[2];
+    public string n;
+
+    private void Awake()
+    {
+        
+        //loginRegistro = game_object.GetComponent<login_registro>();
+    }
+
     private void Start()
     {
 		Screen.orientation = ScreenOrientation.Portrait;
-		reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
-		//Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
-		usuario = "hola";//Debe cambiarse a variable que pase entre escenas
+
+        game_object = GameObject.Find("login_registro_cs");
+        loginRegistro = game_object.GetComponent<login_registro>();
+
+        reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
+        //Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
+        usuario = loginRegistro.user;//Debe cambiarse a variable que pase entre escenas
 		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
 		nUsuario.text = usuario;
 		StartCoroutine("startID");//Buscar el ID del usuario obtenido
@@ -27,7 +42,7 @@ public class botones : MonoBehaviour {
 
     }
 	private IEnumerator startID(){
-		WWW www = new WWW ("https://artashadow.000webhostapp.com/index.php/usuarios");
+		WWW www = new WWW ("http://www.artashadow.xyz/index.php/usuarios");
 		yield return www;
 		if(www.error == null){
 			//bucar el id del usuario
@@ -44,9 +59,13 @@ public class botones : MonoBehaviour {
 				}
 			}
 		}
+        else
+        {
+            Debug.Log("Error en obtener id usuario");
+        }
 	}
 	private IEnumerator startPartida(){
-		WWW www = new WWW ("https://artashadow.000webhostapp.com/index.php/partidas");
+		WWW www = new WWW ("http://www.artashadow.xyz/index.php/partidas");
 		yield return www;
 		if (www.error == null) {
 			bool b = Processjson (www.text);
@@ -97,7 +116,7 @@ public class botones : MonoBehaviour {
 		WWWForm url = new WWWForm();
 		url.AddField ("ruta",ruta);
 		url.AddField ("id_usuario",idUsuario);//Cifrar contraseña
-		using (UnityWebRequest www = UnityWebRequest.Post("https://artashadow.000webhostapp.com/index.php/nuevaPartida", url)){
+		using (UnityWebRequest www = UnityWebRequest.Post("http://www.artashadow.xyz/index.php/nuevaPartida", url)){
 			yield return www.SendWebRequest ();
 			if (www.isNetworkError || www.isHttpError) {
 				Debug.Log (www.error);
