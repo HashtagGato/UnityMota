@@ -15,8 +15,8 @@ public class sig_edificio : MonoBehaviour {
     private string idPartida;
     private string idUsuario;
     private string rutaRecorrer;
-    public string idEdificio;
-    private string edificio;
+    private string idEdificio;
+    public string edificio;
     private Text letra;
     //
     private string[] rutaTot; //= {"A","Z","K","L","J","AC","AF","H","Y","R"};//de alguna forma se debe sacar del web service un arreglo, aunque hagamos un split de lo que manda.

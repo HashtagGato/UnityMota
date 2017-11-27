@@ -7,11 +7,13 @@ using UnityEngine.UI;
 using Vuforia;
 
 public class inicioEscaneo : MonoBehaviour{
-	GameObject but,mImage;
+	GameObject but,mImage, gameObject;
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
     private int numPregunta;
+
+    private sig_edificio sigEdif;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +45,10 @@ public class inicioEscaneo : MonoBehaviour{
             string json = www.text.Replace("\"", ""); //json obtenido desde el WS
                           
             string[] json_array = json.Split(':');
+
+            gameObject = GameObject.Find("script");
+            sigEdif = gameObject.GetComponent<sig_edificio>();
+            string ed = sigEdif.edificio;
             
             string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
             but = GameObject.Find("CanvasResp");
