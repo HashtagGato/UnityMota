@@ -14,9 +14,18 @@ public class sig_edificio : MonoBehaviour {
 	string[] rutaTot = {"A","Z","K","L","J","AC","AF","H","Y","R"};//de alguna forma se debe sacar del web service un arreglo, aunque hagamos un split de lo que manda.
 	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
-	// Use this for initialization
-	void Start () {
+    private GameObject game_object;
+    botones button;
+
+    // Use this for initialization
+    void Start () {
         Screen.orientation = ScreenOrientation.Landscape;
+
+        game_object = GameObject.Find("scripts");
+        button = game_object.GetComponent<botones>();
+        string ruta = button.rutaRecorrer;
+        Debug.Log(ruta + "con el cambio ");
+
 		cMapa = GameObject.Find ("mapa").GetComponent<Canvas> ();
 		cSig = GameObject.Find ("sig_edificio").GetComponent<Canvas> ();
 		cSig.enabled = true;

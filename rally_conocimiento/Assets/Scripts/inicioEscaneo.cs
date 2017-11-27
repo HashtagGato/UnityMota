@@ -44,8 +44,6 @@ public class inicioEscaneo : MonoBehaviour{
                           
             string[] json_array = json.Split(':');
             
-            string correcta = json_array[3].Split('}')[0];
-
             string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
             but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
@@ -65,6 +63,8 @@ public class inicioEscaneo : MonoBehaviour{
             tResp3.text = json_array[2].Split(',')[2];
             tResp4.text = json_array[2].Split(',')[3];
             tPreg.text = json_array[1].Split(',')[0];
+
+            string correcta = json_array[3].Split('}')[0];
 
             Debug.Log(json_array[2]);
 

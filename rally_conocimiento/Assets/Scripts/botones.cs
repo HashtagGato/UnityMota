@@ -12,17 +12,31 @@ public class botones : MonoBehaviour {
     private login_registro loginRegistro;
     private GameObject game_object;
 	private Button reanudar;
-	private string idUsuario;
+	public string idUsuario;
 	private string usuario;
-	private string idPartida;
+	public string idPartida;
 	private Text nUsuario;
 	private int[] recorridos = new int[2];
-    public string n;
+    public string rutaRecorrer;
+    private string ruta;
+
+    public static botones boton;
 
     private void Awake()
     {
-        
-        //loginRegistro = game_object.GetComponent<login_registro>();
+        if (boton == null)
+        {
+            boton = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("es el 1 de botones");
+            //user = usuario.text;
+        }
+        else if (boton != this)
+        {
+            Destroy(gameObject);
+            Debug.Log("se destruye el de botones");
+        }
+
     }
 
     private void Start()
@@ -31,10 +45,11 @@ public class botones : MonoBehaviour {
 
         game_object = GameObject.Find("login_registro_cs");
         loginRegistro = game_object.GetComponent<login_registro>();
+        usuario = loginRegistro.user;//Recuperando el usuario que hizo login
 
         reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
         //Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
-        usuario = loginRegistro.user;//Debe cambiarse a variable que pase entre escenas
+        
 		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
 		nUsuario.text = usuario;
 		StartCoroutine("startID");//Buscar el ID del usuario obtenido
@@ -50,7 +65,7 @@ public class botones : MonoBehaviour {
 			jsonString =  jsonString[1].Split (']');
 			jsonString = jsonString [0].Split ('}');
 			for(int i =0; i<jsonString.Length; i++){
-				if(jsonString[i].Contains(":\""+usuario+"\"")){
+				if(jsonString[i].Contains(":\""+ usuario.ToUpper() +"\"")){
 					string[] json2 = jsonString[i].Split (':');
 					json2 = json2 [1].Split (',');
 					json2 = json2 [0].Split ('\"');
@@ -64,16 +79,21 @@ public class botones : MonoBehaviour {
             Debug.Log("Error en obtener id usuario");
         }
 	}
-	private IEnumerator startPartida(){
+	private IEnumerator startPartida(){ //obtener el estado de la partida, 1 aun esta activa, 0 ya esta finalizada
 		WWW www = new WWW ("http://www.artashadow.xyz/index.php/partidas");
 		yield return www;
 		if (www.error == null) {
 			bool b = Processjson (www.text);
+            Debug.Log(b);
 			if (b == false) {
 				Debug.Log("Deshabilitado");
 				reanudar.enabled = false;
 				//cambiar el color o deshabilitar
-			}
+			} else
+            {
+                Debug.Log("habilitado");
+                reanudar.enabled = true;
+            }
 		} else {
 			Debug.Log ("Error: "+www.error);
 		}
@@ -85,8 +105,9 @@ public class botones : MonoBehaviour {
 		string[] jsonString = json.Split ('[');
 		jsonString =  jsonString[1].Split (']');
 		jsonString = jsonString [0].Split ('}');
+        Debug.Log(jsonString);
 		for (int i = 0; i < jsonString.Length; i++) {
-			if (jsonString [i].Contains ("\"id_usuario\":\""+idUsuario+"\"") && jsonString [i].Contains ("\"h_fin\":\"0000-00-00 00:00:00\"") ) {
+			if (jsonString [i].Contains ("\"id_usuario\":\""+idUsuario+"\"") && jsonString [i].Contains ("\"h_fin\":\"0000-00-00 00:00:00\"") ) { //no seria mejor obtenerlo con el estado de la partida? 1 cuando esta activa, 0 cuando no
 				string[] json2 = jsonString [i].Split (',');
 				if (i > 0) {
 					json2 = json2 [1].Split (':');
@@ -101,6 +122,7 @@ public class botones : MonoBehaviour {
 				Debug.Log ("Tiene Partida "+idPartida);
 			}
 		}
+        Debug.Log(idPartida);
 
 		return bandera;
 	}
@@ -110,9 +132,10 @@ public class botones : MonoBehaviour {
 		//Generar nueva ruta
 		//Crear nueva partida con el id del usuario y la ruta, mandar al WS
 		StartCoroutine("startNuevaRuta");
+
     }
 	private IEnumerator startNuevaRuta(){
-		string ruta = calcularRuta(); //Se debe generar de manera dinamica y aleatoria
+		ruta = calcularRuta(); //Se debe generar de manera dinamica y aleatoria
 		WWWForm url = new WWWForm();
 		url.AddField ("ruta",ruta);
 		url.AddField ("id_usuario",idUsuario);//Cifrar contraseña
@@ -122,21 +145,111 @@ public class botones : MonoBehaviour {
 				Debug.Log (www.error);
 			} else {
 				string json = www.downloadHandler.text;
-				if (json.Equals("\"ok\"")) {
-					Debug.Log ("cambio de escena: Siguiente edificio");
-					SceneManager.LoadScene ("sig_edificio");
+				if (json.Equals("\"ok\""))
+                {
+                    StartCoroutine("getIDPartida");
 				} else {
 					Debug.Log ("Error al crear una nueva partida");
 				}
 			}
 		}
 	}
-	public void BotonReanudar(string scene)
-    {
-		//Enviar idPartida, idUsuario
-		Debug.Log ("cambio de escena: siguiente edificio");
-		SceneManager.LoadScene (scene);
+
+    private IEnumerator getIDPartida()
+    { //obtener el estado de la partida, 1 aun esta activa, 0 ya esta finalizada
+        WWW www = new WWW("http://www.artashadow.xyz/index.php/partidas");
+        yield return www;
+        if (www.error == null)
+        {
+            string[] jsonString = www.text.Split('[');
+            jsonString = jsonString[1].Split(']');
+            jsonString = jsonString[0].Split('}');
+            Debug.Log(jsonString);
+            for (int i = 0; i < jsonString.Length; i++)
+            {
+                if (jsonString[i].Contains("\"id_usuario\":\"" + idUsuario + "\"") && jsonString[i].Contains("\"h_fin\":\"0000-00-00 00:00:00\""))
+                { //no seria mejor obtenerlo con el estado de la partida? 1 cuando esta activa, 0 cuando no
+                    string[] json2 = jsonString[i].Split(',');
+                    if (i > 0)
+                    {
+                        json2 = json2[1].Split(':');
+                        json2 = json2[1].Split('\"');
+                        idPartida = json2[1];
+                    }
+                    else
+                    {
+                        json2 = json2[0].Split(':');
+                        json2 = json2[1].Split('\"');
+                        idPartida = json2[1];
+                    }
+                    Debug.Log("Tiene Partida " + idPartida);
+                }
+            }
+            rutaRecorrer = ruta;
+            Debug.Log(rutaRecorrer);
+            SceneManager.LoadScene("sig_edificio");
+        }
+        else
+        {
+            Debug.Log("Error: " + www.error);
+        }
     }
+
+    public void BotonReanudar(string scene)
+    {
+        StartCoroutine("StartReanudar");
+    }
+
+    private IEnumerator StartReanudar()
+    {
+        string url = string.Concat("http://www.artashadow.xyz/index.php/getPartida/", idPartida);
+        WWW www = new WWW(url);
+        yield return www;
+        if (www.error == null)
+        {
+            //[{"estado":       0
+            //"1","h_inicio":   1
+            //"2017-11-27 03:   2
+            //18:               3
+            //02","h_fin":      4
+            //"0000-00-00 00:   5
+            //00:               6
+            //00","puntaje":    7
+            //"0","ruta":       8
+            //"8,15,11,12,17,18,14,13,19,1","ruta_recorrida":   9
+            //"","id_usuario":  10
+            //"27"}]            11
+            string[] json = www.text.Split(':');
+            string[] rutaCompleta = json[9].Split('"')[1].Split(',');
+            string[] rutaRecorrida = json[10].Split('"')[1].Split(',');
+            if (rutaRecorrida[0].Equals(""))
+            {
+                rutaRecorrer = json[9].Split('"')[1];
+                Debug.Log(rutaRecorrer);
+            } else
+            {
+                int recorridos = rutaRecorrida.Length;
+                string tmp = "";
+                for(int i = recorridos; i < rutaCompleta.Length; i++)
+                {
+                    if(i < rutaCompleta.Length - 1)
+                    {
+                        tmp += rutaCompleta[i] + ",";
+                    }  else
+                    {
+                        tmp += rutaCompleta[i];
+                    }
+                }
+                rutaRecorrer = tmp;
+            }
+            SceneManager.LoadScene("sig_edificio");
+        }
+        else
+        {
+            Debug.Log(www.error);
+        }
+    }
+    
 
 	public void BotonSalir(string scene)
     {
@@ -149,9 +262,9 @@ public class botones : MonoBehaviour {
 		int numero;
 		int cont = 0;
 		string ruta = "";
-		while(cont < 20){
+		while(cont < 10){
 			numero = Numero();
-			if(cont < 19)
+			if(cont < 9)
 			{
 				ruta += numero + ",";
 			} else
