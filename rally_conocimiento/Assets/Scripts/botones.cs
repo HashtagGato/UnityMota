@@ -52,7 +52,8 @@ public class botones : MonoBehaviour {
         
 		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
 		nUsuario.text = usuario;
-		StartCoroutine("startID");//Buscar el ID del usuario obtenido
+        reanudar.enabled = false;
+        StartCoroutine("startID");//Buscar el ID del usuario obtenido
 		StartCoroutine("startPartida");//Verificar si el usuario tiene una partida activa
 
     }
@@ -91,8 +92,9 @@ public class botones : MonoBehaviour {
 				//cambiar el color o deshabilitar
 			} else
             {
-                Debug.Log("habilitado");
                 reanudar.enabled = true;
+                Debug.Log("habilitado");
+                //reanudar.enabled = true;
             }
 		} else {
 			Debug.Log ("Error: "+www.error);
@@ -119,7 +121,7 @@ public class botones : MonoBehaviour {
 					idPartida = json2 [1];
 				}
 				bandera = true;
-				Debug.Log ("Tiene Partida "+idPartida);
+				//Debug.Log ("Tiene Partida "+idPartida);
 			}
 		}
         Debug.Log(idPartida);
@@ -197,58 +199,10 @@ public class botones : MonoBehaviour {
 
     public void BotonReanudar(string scene)
     {
-        StartCoroutine("StartReanudar");
+        SceneManager.LoadScene(scene);
+        //StartCoroutine("StartReanudar");
     }
-
-    private IEnumerator StartReanudar()
-    {
-        string url = string.Concat("http://www.artashadow.xyz/index.php/getPartida/", idPartida);
-        WWW www = new WWW(url);
-        yield return www;
-        if (www.error == null)
-        {
-            //[{"estado":       0
-            //"1","h_inicio":   1
-            //"2017-11-27 03:   2
-            //18:               3
-            //02","h_fin":      4
-            //"0000-00-00 00:   5
-            //00:               6
-            //00","puntaje":    7
-            //"0","ruta":       8
-            //"8,15,11,12,17,18,14,13,19,1","ruta_recorrida":   9
-            //"","id_usuario":  10
-            //"27"}]            11
-            string[] json = www.text.Split(':');
-            string[] rutaCompleta = json[9].Split('"')[1].Split(',');
-            string[] rutaRecorrida = json[10].Split('"')[1].Split(',');
-            if (rutaRecorrida[0].Equals(""))
-            {
-                rutaRecorrer = json[9].Split('"')[1];
-                Debug.Log(rutaRecorrer);
-            } else
-            {
-                int recorridos = rutaRecorrida.Length;
-                string tmp = "";
-                for(int i = recorridos; i < rutaCompleta.Length; i++)
-                {
-                    if(i < rutaCompleta.Length - 1)
-                    {
-                        tmp += rutaCompleta[i] + ",";
-                    }  else
-                    {
-                        tmp += rutaCompleta[i];
-                    }
-                }
-                rutaRecorrer = tmp;
-            }
-            SceneManager.LoadScene("sig_edificio");
-        }
-        else
-        {
-            Debug.Log(www.error);
-        }
-    }
+    
     
 
 	public void BotonSalir(string scene)
