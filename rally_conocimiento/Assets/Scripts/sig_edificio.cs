@@ -10,7 +10,7 @@ public class sig_edificio : MonoBehaviour {
 	Image aux;
 	Text tAux;
 	int rutaAct;
-    string rA;
+    string rA;//Ruta activa
     private string ruta; //obtenerla aqui
     private string idPartida;
     private string idUsuario;
@@ -19,7 +19,7 @@ public class sig_edificio : MonoBehaviour {
     public string edificio;
     private Text letra;
     //
-    private string[] rutaTot; //= {"A","Z","K","L","J","AC","AF","H","Y","R"};//de alguna forma se debe sacar del web service un arreglo, aunque hagamos un split de lo que manda.
+    private string[] rutaTot; //de alguna forma se debe sacar del web service un arreglo
 	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
     private GameObject game_object;
@@ -43,21 +43,22 @@ public class sig_edificio : MonoBehaviour {
 		cSig = GameObject.Find ("sig_edificio").GetComponent<Canvas> ();
 		cSig.enabled = true;
 		cMapa.enabled = false;
-		/*rutaAct = 2;//Se debe jalar del ws, esta para que es??????????????????????
-		if (rutaAct != 0) {
+		//Poner los pines en el mapa
+		if (rutaAct != 0) {//Pone todos si no lleva recorrido ningun punto
 			for (int i = 0; i < nEdificios.Length; i++) {
 				aux = GameObject.Find (nEdificios [i]).GetComponent<Image> ();
 				aux.enabled = false;
 			}
 		}
-		if (rutaAct > 0){
+		if (rutaAct > 0){//Pinta los puntos recorridos
 			for (int i = 0; i < rutaAct; i++) {
 				aux = GameObject.Find (rutaTot [i]).GetComponent<Image> ();
 				tAux = GameObject.Find ("Text" + rutaTot [i]).GetComponent<Text> ();
 				tAux.text = (i+1).ToString ();
 				aux.enabled = true;
 			}
-		}*/
+		}
+		//En la siguiente escena se debe actualizar la ruta recorrida del ws
 	}
 	
 	// Update is called once per frame
@@ -74,22 +75,23 @@ public class sig_edificio : MonoBehaviour {
         string url = string.Concat("http://www.artashadow.xyz/index.php/getPartida/", idPartida);
         WWW www = new WWW(url);
         yield return www;
-        //Debug.Log(www.text);
         if (www.error == null)
         {
             string[] json = www.text.Split(':');
             string[] rutaCompleta = json[9].Split('"')[1].Split(',');
             string[] rutaRecorrida = json[10].Split('"')[1].Split(',');
-            rA = json[1].Split('"')[1];
+            rA = json[1].Split('"')[1];//Recupera el estado de la partida 1 si esta activa
             if (rutaRecorrida[0].Equals(""))
             {
                 rutaRecorrer = json[9].Split('"')[1];
-                //Debug.Log(rutaRecorrer);
+				//string sigE= rutaCompleta[0].Split('"')[0];//Al no llevar ningun edificio recorrido, 
+				rutaAct = 0;
             }
             else
             {
-                int recorridos = rutaRecorrida.Length;
-                string tmp = "";
+                rutaAct = rutaRecorrida.Length;
+
+                /*string tmp = "";
                 for (int i = recorridos; i < rutaCompleta.Length; i++)
                 {
                     if (i < rutaCompleta.Length - 1)
@@ -101,10 +103,11 @@ public class sig_edificio : MonoBehaviour {
                         tmp += rutaCompleta[i];
                     }
                 }
-                rutaRecorrer = tmp;
+                rutaRecorrer = tmp;*/
             }
-            rutaTot = rutaRecorrer.Split(',');
-            idEdificio = rutaTot[0];
+            //rutaTot = rutaRecorrer.Split(',');
+			idEdificio = rutaCompleta[rutaAct];
+			Debug.Log ("unas letras "+idEdificio);
             StartCoroutine("ObtainBuild");
         }
         else
@@ -122,7 +125,7 @@ public class sig_edificio : MonoBehaviour {
         if(www.error == null)
         {
             edificio = www.text.Split('"')[3];
-
+			Debug.Log ("edificio "+ edificio);
             letra = GameObject.Find("Edificio").GetComponent<Text>();
             letra.text = string.Concat("Edificio ", edificio);
             Debug.Log(edificio) ;

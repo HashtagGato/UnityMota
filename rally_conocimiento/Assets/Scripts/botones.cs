@@ -94,7 +94,6 @@ public class botones : MonoBehaviour {
             {
                 reanudar.enabled = true;
                 Debug.Log("habilitado");
-                //reanudar.enabled = true;
             }
 		} else {
 			Debug.Log ("Error: "+www.error);
@@ -110,6 +109,7 @@ public class botones : MonoBehaviour {
         Debug.Log(jsonString);
 		for (int i = 0; i < jsonString.Length; i++) {
 			if (jsonString [i].Contains ("\"id_usuario\":\""+idUsuario+"\"") && jsonString [i].Contains ("\"h_fin\":\"0000-00-00 00:00:00\"") ) { //no seria mejor obtenerlo con el estado de la partida? 1 cuando esta activa, 0 cuando no
+				//Apenas esta buscando el id de partida porque no lo conoce
 				string[] json2 = jsonString [i].Split (',');
 				if (i > 0) {
 					json2 = json2 [1].Split (':');

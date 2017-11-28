@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Vuforia;
 
 public class Movs : MonoBehaviour {
+	GameObject gameObjectScript;
+	private sig_edificio sigEdif;
 	private TrackableBehaviour mTrackableBehaviour;
 	Animator anim;
 	Text tA, tB, tC, tD, tPreg;
@@ -16,11 +18,15 @@ public class Movs : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.Landscape;
-		string nEdificio = "Z";//Remplazar por el index del edificio que regresa el web service.
+		gameObjectScript = GameObject.Find("script");
+		sigEdif = gameObjectScript.GetComponent<sig_edificio>();
+		string ed = sigEdif.edificio;
+		string nEdificio = ed;;//Remplazar por el index del edificio que regresa el web service.
 		anim = GameObject.Find ("Haruko"+nEdificio).GetComponent<Animator> ();
 		cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 		cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
 		tPreg = GameObject.Find ("preguntaText"+nEdificio).GetComponent<Text> ();
+		Debug.Log ("nEdificio: "+nEdificio);
 	}
 	
 	// Update is called once per frame
