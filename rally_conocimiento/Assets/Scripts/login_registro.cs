@@ -13,6 +13,8 @@ public class login_registro : MonoBehaviour {
 	public string user="";
 	public string pass="";
 
+    public GameObject Audio;
+
     public static login_registro nameUser;
     //public string name_user;
 
@@ -35,6 +37,7 @@ public class login_registro : MonoBehaviour {
 
     void Start(){
         Screen.orientation = ScreenOrientation.Portrait;
+        
 
         //obtiene el objeto especificado por el nombre
         GameObject inputFieldU = GameObject.Find ("Usuario");

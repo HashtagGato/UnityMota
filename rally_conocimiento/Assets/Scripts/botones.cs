@@ -210,7 +210,7 @@ public class botones : MonoBehaviour {
 		//Dialogo de confirmacion
 		//si acepta, mandar siguiente funcion
 		Debug.Log ("cambio de escena: Salir");
-		SceneManager.LoadScene (scene);
+        SceneManager.LoadScene (scene);
     }
 	private string calcularRuta(){
 		int numero;
