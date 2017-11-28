@@ -5,6 +5,8 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Vuforia
 {
@@ -29,7 +31,6 @@ namespace Vuforia
     
         void Start()
         {
-
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
@@ -55,17 +56,18 @@ namespace Vuforia
                                         TrackableBehaviour.Status previousStatus,
                                         TrackableBehaviour.Status newStatus)
         {
+			
             if (newStatus == TrackableBehaviour.Status.DETECTED ||
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
-				OnTrackingFound();
+				OnTrackingFound ();
 				cResps.enabled = true;
 				cPreg.enabled = true;
             }
             else
             {
-				OnTrackingLost();
+				OnTrackingLost ();
 				cResps.enabled = false;
 				cPreg.enabled = false;
 				cSig.enabled = false;
@@ -119,5 +121,7 @@ namespace Vuforia
         }
 
         #endregion // PRIVATE_METHODS
+
     }
+
 }

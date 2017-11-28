@@ -7,12 +7,16 @@ using UnityEngine.UI;
 using Vuforia;
 
 public class inicioEscaneo : MonoBehaviour{
-	GameObject but,mImage, gameObjectScript;
+	GameObject but, gameObjectScript;
+	DefaultTrackableEventHandler mImage;
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
+	string[] btnsResps = {"A","B","C","D"};
     private int numPregunta;
-
+	Animator anim;
+	Canvas cSig, cResps;
+	int resp;
     private sig_edificio sigEdif;
 
 	// Use this for initialization
@@ -25,17 +29,21 @@ public class inicioEscaneo : MonoBehaviour{
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown("q")){
-			mImage.SetActive (true);
+			mImage.enabled =true;
 		}
 		if(Input.GetKeyDown("w")){
-			mImage.SetActive (false);
+			mImage.enabled = false;
 		}
 	}
 
     private IEnumerator startPregunta()
     {
         numPregunta = UnityEngine.Random.Range(1, 51);//Obtenemos un numero aleatorio para la pregunta
-
+		GameObject[] harukos = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < harukos.Length; i++)
+		{
+			harukos [i].SetActive (false);
+		}
         string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/", numPregunta.ToString());
 
         WWW www = new WWW(url);
@@ -48,18 +56,20 @@ public class inicioEscaneo : MonoBehaviour{
 
             gameObjectScript = GameObject.Find("script");
 			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
-            string ed = sigEdif.edificio;
-
-            
+			string ed = sigEdif.obtenerEd ();
 			string nEdificio = ed;//Remplazar por el index del edificio que regresa el web service.
             but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
             for (int i = 0; i < nEdificios.Length; i++)
             {
-                mImage = GameObject.Find("ImageTarget" + nEdificios[i]);
-                if (!nEdificio.Equals(nEdificios[i]))
-                    mImage.SetActive(false);
+				mImage = harukos[i].GetComponent<DefaultTrackableEventHandler> ();
+				if (nEdificio.Equals (harukos [i].name.Replace("ImageTarget",""))) {
+					harukos [i].SetActive (true);
+					mImage.enabled = true;
+				}
             }
+
+
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
             tResp1 = GameObject.Find("TextA").GetComponent<Text>();
             tResp2 = GameObject.Find("TextB").GetComponent<Text>();
@@ -71,10 +81,13 @@ public class inicioEscaneo : MonoBehaviour{
             tResp4.text = json_array[2].Split(',')[3];
             tPreg.text = json_array[1].Split(',')[0];
 
-            string correcta = json_array[3].Split('}')[0];
+			resp = int.Parse(json_array[3].Split('}')[0]);
 
             Debug.Log(json_array[2]);
 
+			anim = GameObject.Find ("Haruko"+nEdificio).GetComponent<Animator> ();
+			cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
+			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
             
             //----------------------------------------------------------------------------------------------------------
 
@@ -85,5 +98,21 @@ public class inicioEscaneo : MonoBehaviour{
         }
         
     }
+
+	public void enviarResp(string pTextName){
+		pTextName = pTextName.Replace ("Text", "");
+
+		if (pTextName.Equals (btnsResps [resp])) {
+			tPreg.text = "¡Respuesta correcta!";
+			anim.Play ("jump");
+			cResps.enabled = false;
+			cSig.enabled = true;
+		} else {
+			tPreg.text = "¡Respuesta incorrecta!";
+			anim.Play ("kick");
+			cResps.enabled = false;
+			cSig.enabled = true;
+		}
+	}
 
 }

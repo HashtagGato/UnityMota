@@ -15,7 +15,7 @@ public class sig_edificio : MonoBehaviour {
     private string idPartida;
     private string idUsuario;
     private string rutaRecorrer;
-    private string idEdificio;
+    public string idEdificio;
     public string edificio;
     private Text letra;
     //
@@ -37,10 +37,9 @@ public class sig_edificio : MonoBehaviour {
     }
     void Start () {
         Screen.orientation = ScreenOrientation.Landscape;
-
-
 		cMapa = GameObject.Find ("mapa").GetComponent<Canvas> ();
 		cSig = GameObject.Find ("sig_edificio").GetComponent<Canvas> ();
+		letra = GameObject.Find("Edificio").GetComponent<Text>();
 		cSig.enabled = true;
 		cMapa.enabled = false;
 		//Poner los pines en el mapa
@@ -68,6 +67,22 @@ public class sig_edificio : MonoBehaviour {
 	public void BotonSalir(string scene)
 	{
 		SceneManager.LoadScene (scene);
+	}
+
+	public string obtenerEd(){
+		string url = string.Concat("http://www.artashadow.xyz/index.php/getEdificio/", idEdificio);
+		WWW www = new WWW(url);
+		while (!www.isDone) {
+		}
+		if (www.error == null) {
+			edificio = www.text.Split ('"') [3];
+			Debug.Log ("edificio " + edificio);
+			Debug.Log (edificio);
+		} else {
+			Debug.Log (url);
+			Debug.Log ("error " + www.error);
+		}
+		return edificio;
 	}
 
     private IEnumerator ObtainRuta()
@@ -126,13 +141,12 @@ public class sig_edificio : MonoBehaviour {
         {
             edificio = www.text.Split('"')[3];
 			Debug.Log ("edificio "+ edificio);
-            letra = GameObject.Find("Edificio").GetComponent<Text>();
             letra.text = string.Concat("Edificio ", edificio);
             Debug.Log(edificio) ;
         } else
         {
-            Debug.Log(www.error);
+            Debug.Log("error "+www.error);
         }
-
     }
 }
+

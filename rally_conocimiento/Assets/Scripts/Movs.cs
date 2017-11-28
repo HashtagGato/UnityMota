@@ -20,13 +20,13 @@ public class Movs : MonoBehaviour {
 		Screen.orientation = ScreenOrientation.Landscape;
 		gameObjectScript = GameObject.Find("script");
 		sigEdif = gameObjectScript.GetComponent<sig_edificio>();
-		string ed = sigEdif.edificio;
-		string nEdificio = ed;;//Remplazar por el index del edificio que regresa el web service.
+		string ed = sigEdif.obtenerEd ();
+		string nEdificio = ed;//Remplazar por el index del edificio que regresa el web service.
+		Debug.Log ("nEdificio: "+nEdificio);
 		anim = GameObject.Find ("Haruko"+nEdificio).GetComponent<Animator> ();
 		cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 		cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
 		tPreg = GameObject.Find ("preguntaText"+nEdificio).GetComponent<Text> ();
-		Debug.Log ("nEdificio: "+nEdificio);
 	}
 	
 	// Update is called once per frame
