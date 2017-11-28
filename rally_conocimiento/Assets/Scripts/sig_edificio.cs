@@ -37,7 +37,7 @@ public class sig_edificio : MonoBehaviour {
     }
     void Start () {
         Screen.orientation = ScreenOrientation.Landscape;
-		cMapa = GameObject.Find ("mapa").GetComponent<Canvas> ();
+		cMapa = GameObject.Find ("mapa").GetComponent<Canvas> ();//marca null
 		cSig = GameObject.Find ("sig_edificio").GetComponent<Canvas> ();
 		letra = GameObject.Find("Edificio").GetComponent<Text>();
 		cSig.enabled = true;
@@ -58,6 +58,9 @@ public class sig_edificio : MonoBehaviour {
 			}
 		}
 		//En la siguiente escena se debe actualizar la ruta recorrida del ws
+		/*Checar la ruta recorrida, si esta ya tiene 10 puntos recorridos, 
+		no debe aparecer siguiente edificio, sino terminaste o su score
+		Definir que aparecera y poner aqui*/
 	}
 	
 	// Update is called once per frame
