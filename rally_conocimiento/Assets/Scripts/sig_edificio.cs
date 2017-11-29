@@ -58,7 +58,6 @@ public class sig_edificio : MonoBehaviour {
 	}
 
 	public string obtenerEd(){
-		Debug.Log (idEdificio);
 		return nEdificios[(int.Parse(idEdificio))-1];
 	}
 

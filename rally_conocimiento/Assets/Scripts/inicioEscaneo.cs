@@ -27,14 +27,16 @@ public class inicioEscaneo : MonoBehaviour{
 	Canvas cSig, cResps;
 	int resp;
     private sig_edificio sigEdif;
-	private GameObject[] harukos = GameObject.FindGameObjectsWithTag("Player");
+	private GameObject[] harukos;
 
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
-		for (int i = 0; i < harukos.Length; i++)
-		{
-			harukos [i].SetActive (false);
+		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
+			harukos = GameObject.FindGameObjectsWithTag ("Player");
+			for (int i = 0; i < harukos.Length; i++) {
+				harukos [i].SetActive (false);
+			}
 		}
         StartCoroutine("startPregunta");
 	}
@@ -75,17 +77,13 @@ public class inicioEscaneo : MonoBehaviour{
 			idEdificio = sigEdif.idEdificio;
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
-			Debug.Log ("haru: " + harukos.Length + " edi : " + nEdificio.Length);
-            for (int i = 0; i < nEdificios.Length; i++)
-            {
-				mImage = harukos[i].GetComponent<DefaultTrackableEventHandler> ();
-				if (nEdificio.Equals (harukos [i].name.Replace("ImageTarget",""))) {
+			for (int i = 0; i < nEdificios.Length; i++) {
+				mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> ();
+				if (nEdificio.Equals (harukos [i].name.Replace ("ImageTarget", ""))) {
 					harukos [i].SetActive (true);
 					mImage.enabled = true;
 				}
-            }
-
-
+			}
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
             tResp1 = GameObject.Find("TextA").GetComponent<Text>();
             tResp2 = GameObject.Find("TextB").GetComponent<Text>();
