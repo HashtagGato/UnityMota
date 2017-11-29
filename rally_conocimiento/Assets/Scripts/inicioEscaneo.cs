@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Vuforia;
 
 public class inicioEscaneo : MonoBehaviour{
-	GameObject but, gameObjectScript, haru;
+	GameObject but, gameObjectScript;
 	/*Probando*/
 	private GameObject game_object;
 	botones button;
@@ -32,12 +32,12 @@ public class inicioEscaneo : MonoBehaviour{
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
-		/*if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
+		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
 			harukos = GameObject.FindGameObjectsWithTag ("Player");
 			for (int i = 0; i < harukos.Length; i++) {
 				harukos [i].SetActive (false);
 			}
-		}*/
+		}
         StartCoroutine("startPregunta");
 	}
 
@@ -77,14 +77,11 @@ public class inicioEscaneo : MonoBehaviour{
 			idEdificio = sigEdif.idEdificio;
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
-			Debug.Log (nEdificio);
 			for (int i = 0; i < nEdificios.Length; i++) {
-				//mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> (); harukos [i].name.Replace ("ImageTarget", "")
-				if (!nEdificio.Equals (nEdificios [i])) {
-					Debug.Log (nEdificio + " y no  " + nEdificios [i]);
-					GameObject.Find ("ImageTarget" + nEdificios [i]).GetComponent<DefaultTrackableEventHandler> ().enabled = false;
-					GameObject.Find ("ImageTarget" + nEdificios[i]).SetActive (false);
-					//mImage.enabled = true;
+				mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> ();
+				if (nEdificio.Equals (harukos [i].name.Replace ("ImageTarget", ""))) {
+					harukos [i].SetActive (true);
+					mImage.enabled = true;
 				}
 			}
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
