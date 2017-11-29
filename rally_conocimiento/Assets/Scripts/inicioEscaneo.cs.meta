@@ -1,11 +1,64 @@
 fileFormatVersion: 2
 guid: 5e59854154b8bb54194fdd7ff03c885d
-timeCreated: 1511852746
+timeCreated: 1511942366
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fuente: {instanceID: 0}
+  - a1: {fileID: 8300000, guid: cd3f8dab573f9b249a3bbdd30653fda4, type: 3}
+  - a2: {instanceID: 0}
+  - a3: {instanceID: 0}
+  - a4: {instanceID: 0}
+  - a5: {instanceID: 0}
+  - a6: {instanceID: 0}
+  - a7: {instanceID: 0}
+  - a8: {instanceID: 0}
+  - a9: {instanceID: 0}
+  - a10: {instanceID: 0}
+  - a11: {instanceID: 0}
+  - a12: {instanceID: 0}
+  - a13: {instanceID: 0}
+  - a14: {instanceID: 0}
+  - a15: {instanceID: 0}
+  - a16: {instanceID: 0}
+  - a17: {instanceID: 0}
+  - a18: {instanceID: 0}
+  - a19: {instanceID: 0}
+  - a20: {instanceID: 0}
+  - a21: {instanceID: 0}
+  - a22: {instanceID: 0}
+  - a23: {instanceID: 0}
+  - a24: {instanceID: 0}
+  - a25: {instanceID: 0}
+  - a26: {instanceID: 0}
+  - a27: {instanceID: 0}
+  - a28: {instanceID: 0}
+  - a29: {instanceID: 0}
+  - a30: {instanceID: 0}
+  - a31: {instanceID: 0}
+  - a32: {instanceID: 0}
+  - a33: {instanceID: 0}
+  - a34: {instanceID: 0}
+  - a35: {instanceID: 0}
+  - a36: {instanceID: 0}
+  - a37: {instanceID: 0}
+  - a38: {instanceID: 0}
+  - a39: {instanceID: 0}
+  - a40: {instanceID: 0}
+  - a41: {instanceID: 0}
+  - a42: {instanceID: 0}
+  - a43: {instanceID: 0}
+  - a44: {instanceID: 0}
+  - a45: {instanceID: 0}
+  - a46: {instanceID: 0}
+  - a47: {instanceID: 0}
+  - a48: {instanceID: 0}
+  - a49: {instanceID: 0}
+  - a50: {instanceID: 0}
+  - correcto: {instanceID: 0}
+  - incorrecto: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
