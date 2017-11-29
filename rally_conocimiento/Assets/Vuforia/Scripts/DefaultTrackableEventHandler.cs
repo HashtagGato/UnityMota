@@ -22,7 +22,9 @@ namespace Vuforia
 		private TrackableBehaviour mTrackableBehaviour;
 		private Canvas cResps, cPreg, cSig;
 		private string sName;
-    
+		private sig_edificio sigEdif;
+		GameObject gameObjectScript;
+
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -30,7 +32,9 @@ namespace Vuforia
         #region UNTIY_MONOBEHAVIOUR_METHODS
     
         void Start()
-        {
+		{
+			gameObjectScript = GameObject.Find("script");
+			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
@@ -62,8 +66,11 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
 				OnTrackingFound ();
-				cResps.enabled = true;
-				cPreg.enabled = true;
+				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
+				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
+					cResps.enabled = true;
+					cPreg.enabled = true;
+				}
             }
             else
             {
