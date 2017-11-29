@@ -195,6 +195,7 @@ public class inicioEscaneo : MonoBehaviour{
 			pasadas [1] = pasadas [0];
 			pasadas [0] = p;
 		}
+		return p;
 	}
 	public int getPreguntaID(){
 		return numPregunta;
