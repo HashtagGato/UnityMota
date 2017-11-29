@@ -23,6 +23,7 @@ namespace Vuforia
 		private Canvas cResps, cPreg, cSig;
 		private string sName;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		private sig_edificio sigEdif;
 		GameObject gameObjectScript;
 
@@ -32,6 +33,9 @@ namespace Vuforia
 >>>>>>> parent of 10f3239... yaaaaaaa por fin
 =======
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+    
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -40,12 +44,16 @@ namespace Vuforia
     
         void Start()
 <<<<<<< HEAD
+<<<<<<< HEAD
         {
 =======
 		{
 			gameObjectScript = GameObject.Find("script");
 			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+        {
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
@@ -78,6 +86,7 @@ namespace Vuforia
             {
 				OnTrackingFound ();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
 				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
 					cResps.enabled = true;
@@ -100,6 +109,10 @@ namespace Vuforia
 >>>>>>> parent of 731f822... Revert "Revert "yaaaaaaa por fin""
 =======
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+				cResps.enabled = true;
+				cPreg.enabled = true;
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
             }
             else
             {

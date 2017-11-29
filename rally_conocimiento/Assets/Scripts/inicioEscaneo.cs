@@ -33,19 +33,27 @@ public class inicioEscaneo : MonoBehaviour{
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
 =======
 		/*if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
 			harukos = GameObject.FindGameObjectsWithTag ("Player");
 			for (int i = 0; i < harukos.Length; i++) {
 				harukos [i].SetActive (false);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 =======
 		}*/
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+		}
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
         StartCoroutine("startPregunta");
 	}
 
@@ -85,13 +93,16 @@ public class inicioEscaneo : MonoBehaviour{
 			idEdificio = sigEdif.idEdificio;
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
-			Debug.Log (nEdificio);
 			for (int i = 0; i < nEdificios.Length; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
 				mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> ();
 				if (nEdificio.Equals (harukos [i].name.Replace ("ImageTarget", ""))) {
 					harukos [i].SetActive (true);
 					mImage.enabled = true;
+<<<<<<< HEAD
 =======
 				//mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> (); harukos [i].name.Replace ("ImageTarget", "")
 				if (!nEdificio.Equals (nEdificios [i])) {
@@ -100,6 +111,8 @@ public class inicioEscaneo : MonoBehaviour{
 					GameObject.Find ("ImageTarget" + nEdificios[i]).SetActive (false);
 					//mImage.enabled = true;
 >>>>>>> parent of a382d6b... Audio de pregunta
+=======
+>>>>>>> parent of 10f3239... yaaaaaaa por fin
 				}
 			}
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
