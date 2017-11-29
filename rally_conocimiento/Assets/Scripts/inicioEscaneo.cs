@@ -22,15 +22,16 @@ public class inicioEscaneo : MonoBehaviour{
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
 	string[] btnsResps = {"A","B","C","D"};
-    private int numPregunta;
+    public int numPregunta;
 	Animator anim;
 	Canvas cSig, cResps;
 	int resp;
     private sig_edificio sigEdif;
 	private GameObject[] harukos;
+    AudioSource pregunta;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
 		/*if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
 			harukos = GameObject.FindGameObjectsWithTag ("Player");
@@ -105,7 +106,12 @@ public class inicioEscaneo : MonoBehaviour{
 			anim = GameObject.Find ("Haruko"+nEdificio).GetComponent<Animator> ();
 			cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
-            
+
+
+            pregunta = GameObject.Find(numPregunta.ToString()).GetComponent<AudioSource>();
+            pregunta.Play();
+
+
             //----------------------------------------------------------------------------------------------------------
 
             //Debug.Log(jsonUTF8);
@@ -125,13 +131,18 @@ public class inicioEscaneo : MonoBehaviour{
 			cResps.enabled = false;
 			cSig.enabled = true;
 			puntaje += 1;
+            AudioSource correcta = GameObject.Find("Correcta").GetComponent<AudioSource>();
+            pregunta.Stop();
+            correcta.Play();
+            
 		} else {
 			tPreg.text = "¡Respuesta incorrecta!";
 			anim.Play ("kick");
 			cResps.enabled = false;
 			cSig.enabled = true;
-
-		}
+            AudioSource incorrecta = GameObject.Find("Incorrecto").GetComponent<AudioSource>();
+            incorrecta.Play();
+        }
 		//Obtener ruta
 		StartCoroutine("ObtainRuta");
 	}

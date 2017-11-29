@@ -37,7 +37,9 @@ public class login_registro : MonoBehaviour {
 
     void Start(){
         Screen.orientation = ScreenOrientation.Portrait;
-        
+
+        AudioSource bienvenida = GameObject.Find("Bienvenida").GetComponent<AudioSource>();
+        bienvenida.Play();
 
         //obtiene el objeto especificado por el nombre
         GameObject inputFieldU = GameObject.Find ("Usuario");

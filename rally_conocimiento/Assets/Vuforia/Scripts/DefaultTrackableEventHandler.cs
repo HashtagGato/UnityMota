@@ -24,6 +24,9 @@ namespace Vuforia
 		private string sName;
 		private sig_edificio sigEdif;
 		GameObject gameObjectScript;
+        private inicioEscaneo inicio;
+
+
 
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -44,6 +47,8 @@ namespace Vuforia
             {
                 mTrackableBehaviour.RegisterTrackableEventHandler(this);
             }
+            
+
         }
 
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
@@ -60,21 +65,24 @@ namespace Vuforia
                                         TrackableBehaviour.Status previousStatus,
                                         TrackableBehaviour.Status newStatus)
         {
-			
+            //AudioSource pregunta = GameObject.Find(inicio.numPregunta.ToString()).GetComponent<AudioSource>();
             if (newStatus == TrackableBehaviour.Status.DETECTED ||
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
 				OnTrackingFound ();
-				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
+                //pregunta.Play();
+                Debug.Log (" sig edi" + sigEdif.obtenerEd ());
 				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
 					cResps.enabled = true;
 					cPreg.enabled = true;
-				}
+                    
+                }
             }
             else
             {
 				OnTrackingLost ();
+                //pregunta.Stop();
 				cResps.enabled = false;
 				cPreg.enabled = false;
 				cSig.enabled = false;
@@ -88,8 +96,10 @@ namespace Vuforia
         #region PRIVATE_METHODS
 
 
+
         private void OnTrackingFound()
         {
+
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
@@ -105,6 +115,7 @@ namespace Vuforia
                 component.enabled = true;
             }
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+
         }
 
 
