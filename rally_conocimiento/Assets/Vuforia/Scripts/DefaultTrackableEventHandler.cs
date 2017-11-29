@@ -26,9 +26,12 @@ namespace Vuforia
 		private sig_edificio sigEdif;
 		GameObject gameObjectScript;
 
+<<<<<<< HEAD
 =======
     
 >>>>>>> parent of 10f3239... yaaaaaaa por fin
+=======
+>>>>>>> parent of a382d6b... Audio de pregunta
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -36,7 +39,13 @@ namespace Vuforia
         #region UNTIY_MONOBEHAVIOUR_METHODS
     
         void Start()
+<<<<<<< HEAD
         {
+=======
+		{
+			gameObjectScript = GameObject.Find("script");
+			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
+>>>>>>> parent of a382d6b... Audio de pregunta
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
@@ -74,6 +83,7 @@ namespace Vuforia
 					cResps.enabled = true;
 					cPreg.enabled = true;
 				}
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
                 //pregunta.Play();
@@ -88,6 +98,8 @@ namespace Vuforia
 				cPreg.enabled = true;
 >>>>>>> parent of 10f3239... yaaaaaaa por fin
 >>>>>>> parent of 731f822... Revert "Revert "yaaaaaaa por fin""
+=======
+>>>>>>> parent of a382d6b... Audio de pregunta
             }
             else
             {
