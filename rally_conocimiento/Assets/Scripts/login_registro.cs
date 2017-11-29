@@ -13,7 +13,7 @@ public class login_registro : MonoBehaviour {
 	public string user="";
 	public string pass="";
 
-    public GameObject Audio;
+	public GameObject Audio,btnIniciar, btnRegistro;
 
     public static login_registro nameUser;
     //public string name_user;
@@ -23,7 +23,7 @@ public class login_registro : MonoBehaviour {
         if (nameUser == null)
         {
             nameUser = this;
-            DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
             Debug.Log("es el 1");
             //user = usuario.text;
         }
@@ -42,6 +42,8 @@ public class login_registro : MonoBehaviour {
         //obtiene el objeto especificado por el nombre
         GameObject inputFieldU = GameObject.Find ("Usuario");
 		GameObject inputFieldP = GameObject.Find ("Password");
+		btnRegistro = GameObject.Find ("btnRegistrarse");
+		btnIniciar = GameObject.Find ("btnIniciarSesion");
 		error = GameObject.Find ("Error").GetComponent<Text>();
 		//Ontiene el componente del objeto 
 		usuario = inputFieldU.GetComponent<InputField> ();

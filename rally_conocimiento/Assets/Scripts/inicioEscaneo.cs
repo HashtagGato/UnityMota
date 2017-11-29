@@ -27,11 +27,15 @@ public class inicioEscaneo : MonoBehaviour{
 	Canvas cSig, cResps;
 	int resp;
     private sig_edificio sigEdif;
+	private GameObject[] harukos = GameObject.FindGameObjectsWithTag("Player");
 
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
-
+		for (int i = 0; i < harukos.Length; i++)
+		{
+			harukos [i].SetActive (false);
+		}
         StartCoroutine("startPregunta");
 	}
 
@@ -49,11 +53,6 @@ public class inicioEscaneo : MonoBehaviour{
     private IEnumerator startPregunta()
     {
         numPregunta = UnityEngine.Random.Range(1, 51);//Obtenemos un numero aleatorio para la pregunta
-		GameObject[] harukos = GameObject.FindGameObjectsWithTag("Player");
-		for (int i = 0; i < harukos.Length; i++)
-		{
-			harukos [i].SetActive (false);
-		}
         string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/", numPregunta.ToString());
 
         WWW www = new WWW(url);
@@ -76,6 +75,7 @@ public class inicioEscaneo : MonoBehaviour{
 			idEdificio = sigEdif.idEdificio;
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
+			Debug.Log ("haru: " + harukos.Length + " edi : " + nEdificio.Length);
             for (int i = 0; i < nEdificios.Length; i++)
             {
 				mImage = harukos[i].GetComponent<DefaultTrackableEventHandler> ();

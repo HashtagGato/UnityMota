@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class sig_edificio : MonoBehaviour {
 	GameObject A,AC,AF,AG,CH,D,F,H,J,K,L,P,PE,R,S2,S3,T,U,Y,Z;
 	Canvas  cMapa, cSig;
-	Image aux;
 	Text tAux;
 	int rutaAct;
     string rA;//Ruta activa
@@ -18,10 +17,9 @@ public class sig_edificio : MonoBehaviour {
     public string idEdificio;
     public string edificio;
     private Text letra;
-    //
-    private string[] rutaTot; //de alguna forma se debe sacar del web service un arreglo
+    // //de alguna forma se debe sacar del web service un arreglo
 	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
-	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
+	string [] nEdificios = {"A","CH","D","F","H","J","K","L","P","R","S2","S3","T","U","Y","Z","AC","AF","AG","PE"};
     private GameObject game_object;
     botones button;
 
@@ -43,20 +41,7 @@ public class sig_edificio : MonoBehaviour {
 		cSig.enabled = true;
 		cMapa.enabled = false;
 		//Poner los pines en el mapa
-		if (rutaAct != 0) {//Pone todos si no lleva recorrido ningun punto
-			for (int i = 0; i < nEdificios.Length; i++) {
-				aux = GameObject.Find (nEdificios [i]).GetComponent<Image> ();
-				aux.enabled = false;
-			}
-		}
-		if (rutaAct > 0){//Pinta los puntos recorridos
-			for (int i = 0; i < rutaAct; i++) {
-				aux = GameObject.Find (rutaTot [i]).GetComponent<Image> ();
-				tAux = GameObject.Find ("Text" + rutaTot [i]).GetComponent<Text> ();
-				tAux.text = (i+1).ToString ();
-				aux.enabled = true;
-			}
-		}
+
 		//En la siguiente escena se debe actualizar la ruta recorrida del ws
 		/*Checar la ruta recorrida, si esta ya tiene 10 puntos recorridos, 
 		no debe aparecer siguiente edificio, sino terminaste o su score
@@ -73,19 +58,8 @@ public class sig_edificio : MonoBehaviour {
 	}
 
 	public string obtenerEd(){
-		string url = string.Concat("http://www.artashadow.xyz/index.php/getEdificio/", idEdificio);
-		WWW www = new WWW(url);
-		while (!www.isDone) {
-		}
-		if (www.error == null) {
-			edificio = www.text.Split ('"') [3];
-			Debug.Log ("edificio " + edificio);
-			Debug.Log (edificio);
-		} else {
-			Debug.Log (url);
-			Debug.Log ("error " + www.error);
-		}
-		return edificio;
+		Debug.Log (idEdificio);
+		return nEdificios[(int.Parse(idEdificio))-1];
 	}
 
     private IEnumerator ObtainRuta()
@@ -123,33 +97,33 @@ public class sig_edificio : MonoBehaviour {
                 }
                 rutaRecorrer = tmp;*/
             }
-            //rutaTot = rutaRecorrer.Split(',');
 			idEdificio = rutaCompleta[rutaAct];
-			Debug.Log ("unas letras "+idEdificio);
-            StartCoroutine("ObtainBuild");
+			letra.text = string.Concat ("Edificio ", obtenerEd ());
+			pines (rutaAct, rutaCompleta);
         }
         else
         {
             Debug.Log(www.error);
         }
     }
-
-    private IEnumerator ObtainBuild()
-    {
-        //Debug.Log(idEdificio);
-        string url = string.Concat("http://www.artashadow.xyz/index.php/getEdificio/", idEdificio);
-        WWW www = new WWW(url);
-        yield return www;
-        if(www.error == null)
-        {
-            edificio = www.text.Split('"')[3];
-			Debug.Log ("edificio "+ edificio);
-            letra.text = string.Concat("Edificio ", edificio);
-            Debug.Log(edificio) ;
-        } else
-        {
-            Debug.Log("error "+www.error);
-        }
-    }
+	private void pines(int posicion, string[] rutaTot){
+		Debug.Log("rutaACt = "+posicion+" rutaCOmopleta = "+rutaTot.Length);
+		if (posicion != 0) {//Pone todos si no lleva recorrido ningun punto
+			for (int i = 0; i < nEdificios.Length; i++) {
+				Debug.Log("rutaACt = "+posicion+" rutaCOmopleta = "+rutaTot.Length);
+				Image aux = GameObject.Find (nEdificios [i]).GetComponent<Image> ();
+				aux.enabled = false;
+			}
+		}
+		if (posicion > 0){//Pinta los puntos recorridos
+			for (int i = 0; i < rutaAct; i++) {
+				Debug.Log (nEdificios [int.Parse (rutaTot [i]) - 1]);
+				Image aux = GameObject.Find (nEdificios[int.Parse(rutaTot[i])-1]).GetComponent<Image> ();
+				tAux = GameObject.Find ("Text" + nEdificios[int.Parse(rutaTot[i])-1]).GetComponent<Text> ();
+				tAux.text = (i+1).ToString ();
+				aux.enabled = true;
+			}
+		}
+	}
 }
 
