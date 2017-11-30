@@ -196,13 +196,15 @@ public class botones : MonoBehaviour {
     }
 	private string calcularRuta(){
 		int numero;
-		int cont = 0;
-		string ruta = "";
+		int cont = 1;
+		recorridos[0] = 4;
+		string ruta = "4,";
 		while(cont < 10){
 			numero = Numero();
 			if(cont < 9)
 			{
 				ruta += numero + ",";
+
 			} else
 			{
 				ruta += numero;

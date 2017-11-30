@@ -27,6 +27,7 @@ public class login_registro : MonoBehaviour {
 		password = inputFieldP.GetComponent<InputField> ();
 		fi.setUser(usuario.text);
 		fi.setPass(password.text);
+		error = GameObject.Find ("Error").GetComponent<Text> ();
     }
 	public void Login()
     {
@@ -51,7 +52,6 @@ public class login_registro : MonoBehaviour {
 				if (!json.Equals("[]")) {
 					CambiarEscena("menu");
 				} else {
-					error = GameObject.Find ("Error").GetComponent<Text> ();
 					error.text = "Usuario/Contraseña Incorrectos";
 					error.color = Color.red;
 				}
@@ -95,13 +95,13 @@ public class login_registro : MonoBehaviour {
 							Debug.Log (www2.error);
 						} else {
 							 json = www2.downloadHandler.text;
-							if (json.Contains("ok")) {
+							if (json.Contains ("ok")) {
 								Debug.Log ("Usuario Registrado correctamente");
 								Debug.Log (json);
 								StartCoroutine ("startPost");
 							} else {
 								error.text = "El usuario ya existe";
-									error.color = Color.red;
+								error.color = Color.red;
 							}
 						}
 					}
