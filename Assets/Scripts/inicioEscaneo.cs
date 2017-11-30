@@ -21,6 +21,7 @@ public class inicioEscaneo : MonoBehaviour{
 	private string idPartida;
 	private string idUsuario;
 	DefaultTrackableEventHandler mImage;
+
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
