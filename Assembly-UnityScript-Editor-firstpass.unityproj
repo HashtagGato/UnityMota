@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F1CBEF70-3E46-45DF-F37C-905E804D9103}</ProjectGuid>
+    <ProjectGuid>{4A5F41AB-9685-D2C4-5455-5E766C4C9F70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-UnityScript-Editor-firstpass</AssemblyName>
@@ -134,10 +134,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Vuforia.UnityExtensions.Editor">
- <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/rally_conocimiento/Assets/Vuforia/Editor/Scripts/Vuforia.UnityExtensions.Editor.dll</HintPath>
+ <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/UnityMota/Assets/Vuforia/Editor/Scripts/Vuforia.UnityExtensions.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Vuforia.UnityExtensions">
- <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/rally_conocimiento/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
+ <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/UnityMota/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/Adolfo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{01746A34-C078-D8AC-DD2C-5AE8B01D2756}</ProjectGuid>
+    <ProjectGuid>{0C5743D8-77AE-A3FC-08CB-4E77E81E15AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -138,10 +138,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Vuforia.UnityExtensions.Editor">
- <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/rally_conocimiento/Assets/Vuforia/Editor/Scripts/Vuforia.UnityExtensions.Editor.dll</HintPath>
+ <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/UnityMota/Assets/Vuforia/Editor/Scripts/Vuforia.UnityExtensions.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Vuforia.UnityExtensions">
- <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/rally_conocimiento/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
+ <HintPath>C:/Users/Adolfo/Documents/Unity Projects/UnityMota-a382d6b17dd53b89ce5b604e7e8de56e79f1f21b/UnityMota/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/Adolfo/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@1.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -161,9 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{1E5DB30D-E87C-A88C-8255-A152371DCD0C}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{8BF99691-D13A-AC20-034C-20A32E782821}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-Editor-firstpass.csproj">
-      <Project>{F1CBEF70-3E46-45DF-F37C-905E804D9103}</Project>      <Name>Assembly-UnityScript-Editor-firstpass</Name>    </ProjectReference>
+      <Project>{4A5F41AB-9685-D2C4-5455-5E766C4C9F70}</Project>      <Name>Assembly-UnityScript-Editor-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
