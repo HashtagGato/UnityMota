@@ -4,17 +4,20 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Vuforia;
 
 public class inicioEscaneo : MonoBehaviour{
-	GameObject but, gameObjectScript;
+	GameObject but, gameObjectScript, haru;
 	/*Probando*/
 	private GameObject game_object;
 	botones button;
 	string rutaRecorrida;
 	string idEdificio;
+	private int[] pasadas = new int[5];
 	/**/
 	private int puntaje;
+	private int pp;
 	private string idPartida;
 	private string idUsuario;
 	DefaultTrackableEventHandler mImage;
@@ -28,32 +31,14 @@ public class inicioEscaneo : MonoBehaviour{
 	int resp;
     private sig_edificio sigEdif;
 	private GameObject[] harukos;
+	public AudioSource fuente;
+	public AudioClip correcto, incorrecto;
+	private fin fi;
 
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
-=======
-		/*if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
-		if (GameObject.FindGameObjectsWithTag ("Player").Length > 0) {
->>>>>>> parent of 10f3239... yaaaaaaa por fin
-			harukos = GameObject.FindGameObjectsWithTag ("Player");
-			for (int i = 0; i < harukos.Length; i++) {
-				harukos [i].SetActive (false);
-			}
-<<<<<<< HEAD
-<<<<<<< HEAD
-		}
-=======
-		}*/
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
-		}
->>>>>>> parent of 10f3239... yaaaaaaa por fin
+		fuente = GetComponent<AudioSource> ();
         StartCoroutine("startPregunta");
 	}
 
@@ -70,7 +55,7 @@ public class inicioEscaneo : MonoBehaviour{
 
     private IEnumerator startPregunta()
     {
-        numPregunta = UnityEngine.Random.Range(1, 51);//Obtenemos un numero aleatorio para la pregunta
+		numPregunta = Obt_Pregunta ();//Obtenemos un numero aleatorio para la pregunta
         string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/", numPregunta.ToString());
 
         WWW www = new WWW(url);
@@ -94,25 +79,9 @@ public class inicioEscaneo : MonoBehaviour{
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
 			for (int i = 0; i < nEdificios.Length; i++) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 10f3239... yaaaaaaa por fin
-				mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> ();
-				if (nEdificio.Equals (harukos [i].name.Replace ("ImageTarget", ""))) {
-					harukos [i].SetActive (true);
-					mImage.enabled = true;
-<<<<<<< HEAD
-=======
-				//mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> (); harukos [i].name.Replace ("ImageTarget", "")
 				if (!nEdificio.Equals (nEdificios [i])) {
-					Debug.Log (nEdificio + " y no  " + nEdificios [i]);
-					GameObject.Find ("ImageTarget" + nEdificios [i]).GetComponent<DefaultTrackableEventHandler> ().enabled = false;
 					GameObject.Find ("ImageTarget" + nEdificios[i]).SetActive (false);
-					//mImage.enabled = true;
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
->>>>>>> parent of 10f3239... yaaaaaaa por fin
+
 				}
 			}
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
@@ -152,16 +121,20 @@ public class inicioEscaneo : MonoBehaviour{
 			anim.Play ("jump");
 			cResps.enabled = false;
 			cSig.enabled = true;
-			puntaje += 1;
+			pp = 1;
+			fuente.clip = correcto;
+			fuente.Play ();
 		} else {
 			tPreg.text = "¡Respuesta incorrecta!";
 			anim.Play ("kick");
 			cResps.enabled = false;
 			cSig.enabled = true;
-
+			fuente.clip = incorrecto;
+			fuente.Play ();
+			pp = 0;
 		}
 		//Obtener ruta
-		StartCoroutine("ObtainRuta");
+
 	}
 	private IEnumerator ObtainRuta()//Obtiene la ruta recorrida hasta antes de esta pregunta y le agrega el punto actual
 	{
@@ -180,12 +153,17 @@ public class inicioEscaneo : MonoBehaviour{
 			string puntajeS =json[8].Split(',')[0];
 			puntajeS =puntajeS.Split('"')[1];
 			puntaje = int.Parse (puntajeS);
+			Debug.Log ("puntaje : "+puntaje+" pp : "+pp);
+			puntaje += pp;
 			StartCoroutine("ActualizarPartida");
 		}
 		else
 		{
 			Debug.Log(www.error);
 		}
+	}
+	public void obtainX(){
+		StartCoroutine("ObtainRuta");
 	}
 	private IEnumerator ActualizarPartida(){//Actualiza la partida
 		string url = "http://www.artashadow.xyz/index.php/actualizarPartida?";
@@ -200,11 +178,35 @@ public class inicioEscaneo : MonoBehaviour{
 				string respuesta = www.downloadHandler.text;
 				if (respuesta.Contains("\"ok\"")) {
 					Debug.Log ("Si se actualizo");
+
 				} else {
 					Debug.Log (respuesta);
 				}
 			}
-		}		
+		}
+		if (rutaRecorrida.Split(',').Length == 10) {
+			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
+			fi.setPuntuaje (puntaje);
+			SceneManager.LoadScene ("finalizar");
+		} else {
+			SceneManager.LoadScene ("sig_edificio");
+		}
+	}
+	private int Obt_Pregunta(){
+		int p = UnityEngine.Random.Range (1,51);
+		if(p == pasadas[0] | p == pasadas[1] | p == pasadas[2] | p == pasadas[3] | p == pasadas[4]){
+			p = Obt_Pregunta();
+		}else{
+			pasadas [4] = pasadas [4];
+			pasadas [3] = pasadas [2];
+			pasadas [2] = pasadas [1];
+			pasadas [1] = pasadas [0];
+			pasadas [0] = p;
+		}
+		return p;
+	}
+	public int getPreguntaID(){
+		return numPregunta;
 	}
 
 }

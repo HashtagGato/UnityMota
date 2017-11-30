@@ -22,20 +22,12 @@ namespace Vuforia
 		private TrackableBehaviour mTrackableBehaviour;
 		private Canvas cResps, cPreg, cSig;
 		private string sName;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		private sig_edificio sigEdif;
-		GameObject gameObjectScript;
-
-<<<<<<< HEAD
-=======
-    
->>>>>>> parent of 10f3239... yaaaaaaa por fin
-=======
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
-    
->>>>>>> parent of 10f3239... yaaaaaaa por fin
+		GameObject gameObjectScript, mov;
+		public  AudioClip a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21,a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40,a41, a42, a43, a44, a45, a46, a47, a48, a49, a50;
+		AudioClip[] audios;
+		public AudioSource fuente;
+		private inicioEscaneo iE;
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -43,17 +35,15 @@ namespace Vuforia
         #region UNTIY_MONOBEHAVIOUR_METHODS
     
         void Start()
-<<<<<<< HEAD
-<<<<<<< HEAD
-        {
-=======
 		{
+			fuente = GetComponent<AudioSource> ();
+			AudioClip[] auxAudios = {a1, a2,a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21,a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40,a41, a42, a43, a44, a45, a46, a47, a48, a49, a50};
+			audios = auxAudios;
+
+			mov = GameObject.Find ("ScriptMov");
+			iE = mov.GetComponent<inicioEscaneo> ();
 			gameObjectScript = GameObject.Find("script");
 			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
-        {
->>>>>>> parent of 10f3239... yaaaaaaa por fin
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
@@ -85,34 +75,7 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
 				OnTrackingFound ();
-<<<<<<< HEAD
-<<<<<<< HEAD
 				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
-				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
-					cResps.enabled = true;
-					cPreg.enabled = true;
-				}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-                //pregunta.Play();
-                Debug.Log (" sig edi" + sigEdif.obtenerEd ());
-				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
-					cResps.enabled = true;
-					cPreg.enabled = true;
-                    
-                }
-=======
-				cResps.enabled = true;
-				cPreg.enabled = true;
->>>>>>> parent of 10f3239... yaaaaaaa por fin
->>>>>>> parent of 731f822... Revert "Revert "yaaaaaaa por fin""
-=======
->>>>>>> parent of a382d6b... Audio de pregunta
-=======
-				cResps.enabled = true;
-				cPreg.enabled = true;
->>>>>>> parent of 10f3239... yaaaaaaa por fin
             }
             else
             {
@@ -120,6 +83,8 @@ namespace Vuforia
 				cResps.enabled = false;
 				cPreg.enabled = false;
 				cSig.enabled = false;
+				fuente.clip = audios [(iE.getPreguntaID ())-1];
+				fuente.Stop ();
             }
         }
 
@@ -146,6 +111,13 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
+			if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
+				cResps.enabled = true;
+				cPreg.enabled = true;
+				fuente.clip = audios [(iE.getPreguntaID ())-1];
+				Debug.Log ("El de ABAJO " + iE.getPreguntaID ());
+				fuente.Play ();
+			}
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
