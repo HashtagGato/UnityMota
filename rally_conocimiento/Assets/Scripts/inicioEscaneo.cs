@@ -17,9 +17,11 @@ public class inicioEscaneo : MonoBehaviour{
 	private int[] pasadas = new int[5];
 	/**/
 	private int puntaje;
+	private int pp;
 	private string idPartida;
 	private string idUsuario;
 	DefaultTrackableEventHandler mImage;
+
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
 	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
@@ -32,6 +34,7 @@ public class inicioEscaneo : MonoBehaviour{
 	private GameObject[] harukos;
 	public AudioSource fuente;
 	public AudioClip correcto, incorrecto;
+	private fin fi;
 
 	// Use this for initialization
 	void Start () {
@@ -77,9 +80,7 @@ public class inicioEscaneo : MonoBehaviour{
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
 			for (int i = 0; i < nEdificios.Length; i++) {
-				//mImage = harukos [i].GetComponent<DefaultTrackableEventHandler> (); harukos [i].name.Replace ("ImageTarget", "")
 				if (!nEdificio.Equals (nEdificios [i])) {
-					GameObject.Find ("ImageTarget" + nEdificios [i]).GetComponent<DefaultTrackableEventHandler> ().enabled = false;
 					GameObject.Find ("ImageTarget" + nEdificios[i]).SetActive (false);
 
 				}
@@ -121,7 +122,7 @@ public class inicioEscaneo : MonoBehaviour{
 			anim.Play ("jump");
 			cResps.enabled = false;
 			cSig.enabled = true;
-			puntaje += 1;
+			pp = 1;
 			fuente.clip = correcto;
 			fuente.Play ();
 		} else {
@@ -131,7 +132,7 @@ public class inicioEscaneo : MonoBehaviour{
 			cSig.enabled = true;
 			fuente.clip = incorrecto;
 			fuente.Play ();
-
+			pp = 0;
 		}
 		//Obtener ruta
 
@@ -153,6 +154,8 @@ public class inicioEscaneo : MonoBehaviour{
 			string puntajeS =json[8].Split(',')[0];
 			puntajeS =puntajeS.Split('"')[1];
 			puntaje = int.Parse (puntajeS);
+			Debug.Log ("puntaje : "+puntaje+" pp : "+pp);
+			puntaje += pp;
 			StartCoroutine("ActualizarPartida");
 		}
 		else
@@ -182,7 +185,13 @@ public class inicioEscaneo : MonoBehaviour{
 				}
 			}
 		}
-		SceneManager.LoadScene ("sig_edificio");
+		if (rutaRecorrida.Split(',').Length == 10) {
+			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
+			fi.setPuntuaje (puntaje);
+			SceneManager.LoadScene ("finalizar");
+		} else {
+			SceneManager.LoadScene ("sig_edificio");
+		}
 	}
 	private int Obt_Pregunta(){
 		int p = UnityEngine.Random.Range (1,51);

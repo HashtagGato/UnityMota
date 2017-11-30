@@ -76,14 +76,6 @@ namespace Vuforia
             {
 				OnTrackingFound ();
 				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
-				if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
-					cResps.enabled = true;
-					cPreg.enabled = true;
-					fuente.clip = audios [(iE.getPreguntaID ())-1];
-					Debug.Log ("El de ABAJO " + iE.getPreguntaID ());
-					fuente.Play ();
-				}
-
             }
             else
             {
@@ -119,6 +111,13 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
+			if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
+				cResps.enabled = true;
+				cPreg.enabled = true;
+				fuente.clip = audios [(iE.getPreguntaID ())-1];
+				Debug.Log ("El de ABAJO " + iE.getPreguntaID ());
+				fuente.Play ();
+			}
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 

@@ -23,6 +23,7 @@ public class login_registro : MonoBehaviour {
         if (nameUser == null)
         {
             nameUser = this;
+
 			DontDestroyOnLoad(gameObject);
             Debug.Log("es el 1");
             //user = usuario.text;
