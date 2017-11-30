@@ -28,6 +28,7 @@ namespace Vuforia
 		AudioClip[] audios;
 		public AudioSource fuente;
 		private inicioEscaneo iE;
+		private bool ban=false;
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -83,8 +84,12 @@ namespace Vuforia
 				cResps.enabled = false;
 				cPreg.enabled = false;
 				cSig.enabled = false;
-				fuente.clip = audios [(iE.getPreguntaID ())-1];
-				fuente.Stop ();
+				if (!ban) {
+					ban = true;
+				} else {
+					fuente.clip = audios [(iE.getPreguntaID ()) - 1];
+					fuente.Stop ();
+				}
             }
         }
 
@@ -115,7 +120,7 @@ namespace Vuforia
 				cResps.enabled = true;
 				cPreg.enabled = true;
 				fuente.clip = audios [(iE.getPreguntaID ())-1];
-				Debug.Log ("El de ABAJO " + iE.getPreguntaID ());
+				Debug.Log ("El de ABAJO " + ((iE.getPreguntaID ())-1));
 				fuente.Play ();
 			}
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");

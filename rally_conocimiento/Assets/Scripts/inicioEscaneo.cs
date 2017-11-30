@@ -20,7 +20,6 @@ public class inicioEscaneo : MonoBehaviour{
 	private int pp;
 	private string idPartida;
 	private string idUsuario;
-	DefaultTrackableEventHandler mImage;
 
 	Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
@@ -31,7 +30,6 @@ public class inicioEscaneo : MonoBehaviour{
 	Canvas cSig, cResps;
 	int resp;
     private sig_edificio sigEdif;
-	private GameObject[] harukos;
 	public AudioSource fuente;
 	public AudioClip correcto, incorrecto;
 	private fin fi;
@@ -43,21 +41,10 @@ public class inicioEscaneo : MonoBehaviour{
         StartCoroutine("startPregunta");
 	}
 
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown("q")){
-			mImage.enabled =true;
-		}
-		if(Input.GetKeyDown("w")){
-			mImage.enabled = false;
-		}
-	}
-
     private IEnumerator startPregunta()
     {
 		numPregunta = Obt_Pregunta ();//Obtenemos un numero aleatorio para la pregunta
-        string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/", numPregunta.ToString());
+		string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/",numPregunta);
 
         WWW www = new WWW(url);
         yield return www;
@@ -116,7 +103,6 @@ public class inicioEscaneo : MonoBehaviour{
 
 	public void enviarResp(string pTextName){
 		pTextName = pTextName.Replace ("Text", "");
-
 		if (pTextName.Equals (btnsResps [resp])) {
 			tPreg.text = "¡Respuesta correcta!";
 			anim.Play ("jump");
@@ -188,9 +174,31 @@ public class inicioEscaneo : MonoBehaviour{
 		if (rutaRecorrida.Split(',').Length == 10) {
 			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
 			fi.setPuntuaje (puntaje);
+			StartCoroutine ("terminarPartida");
 			SceneManager.LoadScene ("finalizar");
 		} else {
 			SceneManager.LoadScene ("sig_edificio");
+		}
+	}
+	private IEnumerator terminarPartida(){
+		string url = "http://www.artashadow.xyz/index.php/terminarPartida?";
+		string datos = "id_partida=" + idPartida;
+		url += datos;
+		byte[] data = System.Text.Encoding.UTF8.GetBytes (datos);
+		using (UnityWebRequest www = UnityWebRequest.Put(url,data)){
+			yield return www.SendWebRequest ();
+			if (www.isNetworkError || www.isHttpError) {
+				Debug.Log ("OYE! ERROR AL TERMINAR PARTIDA ->" + www.error);
+			} else {
+				string respuesta = www.downloadHandler.text;
+				if (respuesta.Contains("\"ok\"")) {
+					Debug.Log ("Termino la partida, hijo!!!");
+
+				} else {
+					Debug.Log (respuesta);
+				}
+			}
+			
 		}
 	}
 	private int Obt_Pregunta(){
@@ -198,7 +206,7 @@ public class inicioEscaneo : MonoBehaviour{
 		if(p == pasadas[0] | p == pasadas[1] | p == pasadas[2] | p == pasadas[3] | p == pasadas[4]){
 			p = Obt_Pregunta();
 		}else{
-			pasadas [4] = pasadas [4];
+			pasadas [4] = pasadas [3];
 			pasadas [3] = pasadas [2];
 			pasadas [2] = pasadas [1];
 			pasadas [1] = pasadas [0];
