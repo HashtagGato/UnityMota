@@ -9,47 +9,23 @@ using System;
 
 public class botones : MonoBehaviour {
 
-    private login_registro loginRegistro;
-    private GameObject game_object;
+	private fin loginRegistro;
 	private Button reanudar;
-	public string idUsuario;
+	private string idUsuario;
 	private string usuario;
-	public string idPartida;
+	private string idPartida;
 	private Text nUsuario;
 	private int[] recorridos = new int[2];
-    public string rutaRecorrer;
+    private string rutaRecorrer;
     private string ruta;
-
-    public static botones boton;
-
-    private void Awake()
-    {
-        if (boton == null)
-        {
-            boton = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("es el 1 de botones");
-            //user = usuario.text;
-        }
-        else if (boton != this)
-        {
-            Destroy(gameObject);
-            Debug.Log("se destruye el de botones");
-        }
-
-    }
 
     private void Start()
     {
 		Screen.orientation = ScreenOrientation.Portrait;
-
-        game_object = GameObject.Find("login_registro_cs");
-        loginRegistro = game_object.GetComponent<login_registro>();
-        usuario = loginRegistro.user;//Recuperando el usuario que hizo login
-
+		loginRegistro = GameObject.Find("scriptFin").GetComponent<fin>();
+		usuario = loginRegistro.getUser ();//Recuperando el usuario que hizo login
         reanudar = GameObject.Find ("btnReanudar").GetComponent<Button>();
         //Verificar si el usuario tiene una partida (sacar el id del usuario, buscar su id en el json de partidas)
-        
 		nUsuario = GameObject.Find("nUsuario").GetComponent<Text>();
 		nUsuario.text = usuario;
         reanudar.enabled = false;
@@ -71,6 +47,7 @@ public class botones : MonoBehaviour {
 					json2 = json2 [1].Split (',');
 					json2 = json2 [0].Split ('\"');
 					idUsuario = json2[1];
+					loginRegistro.setidUsuario (idUsuario);
 					Debug.Log ("Id de usuario = " + idUsuario);
 				}
 			}
@@ -115,10 +92,12 @@ public class botones : MonoBehaviour {
 					json2 = json2 [1].Split (':');
 					json2 = json2 [1].Split ('\"');
 					idPartida = json2 [1];
+					loginRegistro.setIdPartida (idPartida);
 				} else {
 					json2 = json2 [0].Split (':');
 					json2 = json2 [1].Split ('\"');
 					idPartida = json2 [1];
+					loginRegistro.setIdPartida (idPartida);
 				}
 				bandera = true;
 				//Debug.Log ("Tiene Partida "+idPartida);
@@ -140,7 +119,7 @@ public class botones : MonoBehaviour {
 		ruta = calcularRuta(); //Se debe generar de manera dinamica y aleatoria
 		WWWForm url = new WWWForm();
 		url.AddField ("ruta",ruta);
-		url.AddField ("id_usuario",idUsuario);//Cifrar contraseña
+		url.AddField ("id_usuario",loginRegistro.getidUsuario());//Cifrar contraseña
 		using (UnityWebRequest www = UnityWebRequest.Post("http://www.artashadow.xyz/index.php/nuevaPartida", url)){
 			yield return www.SendWebRequest ();
 			if (www.isNetworkError || www.isHttpError) {
@@ -169,7 +148,7 @@ public class botones : MonoBehaviour {
             Debug.Log(jsonString);
             for (int i = 0; i < jsonString.Length; i++)
             {
-                if (jsonString[i].Contains("\"id_usuario\":\"" + idUsuario + "\"") && jsonString[i].Contains("\"h_fin\":\"0000-00-00 00:00:00\""))
+				if (jsonString[i].Contains("\"id_usuario\":\"" + loginRegistro.getidUsuario() + "\"") && jsonString[i].Contains("\"h_fin\":\"0000-00-00 00:00:00\""))
                 { //no seria mejor obtenerlo con el estado de la partida? 1 cuando esta activa, 0 cuando no
                     string[] json2 = jsonString[i].Split(',');
                     if (i > 0)
@@ -177,17 +156,20 @@ public class botones : MonoBehaviour {
                         json2 = json2[1].Split(':');
                         json2 = json2[1].Split('\"');
                         idPartida = json2[1];
+						loginRegistro.setIdPartida (idPartida);
                     }
                     else
                     {
                         json2 = json2[0].Split(':');
                         json2 = json2[1].Split('\"');
-                        idPartida = json2[1];
+						idPartida = json2[1];
+						loginRegistro.setIdPartida (idPartida);
                     }
                     Debug.Log("Tiene Partida " + idPartida);
                 }
             }
             rutaRecorrer = ruta;
+			loginRegistro.setrutaRecorrer (rutaRecorrer);
             Debug.Log(rutaRecorrer);
             SceneManager.LoadScene("sig_edificio");
         }

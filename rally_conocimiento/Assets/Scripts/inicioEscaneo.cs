@@ -11,7 +11,7 @@ public class inicioEscaneo : MonoBehaviour{
 	GameObject but, gameObjectScript, haru;
 	/*Probando*/
 	private GameObject game_object;
-	botones button;
+	fin button;
 	string rutaRecorrida;
 	string idEdificio;
 	private int[] pasadas = new int[5];
@@ -57,9 +57,8 @@ public class inicioEscaneo : MonoBehaviour{
             gameObjectScript = GameObject.Find("script");
 			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
 			/*********recuperar el id de la partida**********/
-			game_object = GameObject.Find("scripts");
-			button = game_object.GetComponent<botones>();
-			idPartida = button.idPartida;
+			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
+			idPartida = fi.getIdPartida();
 			/******************/
 			string ed = sigEdif.obtenerEd ();
 			string nEdificio = ed;//id? del edificio que regresa el web service.
@@ -172,7 +171,6 @@ public class inicioEscaneo : MonoBehaviour{
 			}
 		}
 		if (rutaRecorrida.Split(',').Length == 10) {
-			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
 			fi.setPuntuaje (puntaje);
 			StartCoroutine ("terminarPartida");
 			SceneManager.LoadScene ("finalizar");

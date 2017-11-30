@@ -21,16 +21,15 @@ public class sig_edificio : MonoBehaviour {
 	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
 	string [] nEdificios = {"A","CH","D","F","H","J","K","L","P","R","S2","S3","T","U","Y","Z","AC","AF","AG","PE"};
     private GameObject game_object;
-    botones button;
+	fin button;
 
     // Use this for initialization
     private void Awake()
     {
-        game_object = GameObject.Find("scripts");
-        button = game_object.GetComponent<botones>();
+		button = GameObject.Find("scriptFin").GetComponent<fin>();
         //ruta = button.rutaRecorrer;//toda la ruta obtenida cuando hace login, tenemos que ir 
-        idPartida = button.idPartida;
-        idUsuario = button.idUsuario;
+		idPartida = button.getIdPartida();
+		idUsuario = button.getidUsuario();
         StartCoroutine("ObtainRuta");
     }
     void Start () {

@@ -10,47 +10,23 @@ public class login_registro : MonoBehaviour {
 	private InputField usuario;
 	private InputField password;
 	private Text error;
-	public string user="";
-	public string pass="";
-
-	public GameObject Audio,btnIniciar, btnRegistro;
-
-    public static login_registro nameUser;
-    //public string name_user;
-
-    private void Awake()
-    {
-        if (nameUser == null)
-        {
-            nameUser = this;
-
-			DontDestroyOnLoad(gameObject);
-            Debug.Log("es el 1");
-            //user = usuario.text;
-        }
-        else if (nameUser != this)
-        {
-            Destroy(gameObject);
-            Debug.Log("se destruye");
-        }
-
-    }
-
+	private string user="";
+	private string pass="";
+	private fin fi;
+	private GameObject Audio,btnIniciar, btnRegistro;
     void Start(){
         Screen.orientation = ScreenOrientation.Portrait;
-        
-
+		fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
         //obtiene el objeto especificado por el nombre
         GameObject inputFieldU = GameObject.Find ("Usuario");
 		GameObject inputFieldP = GameObject.Find ("Password");
 		btnRegistro = GameObject.Find ("btnRegistrarse");
 		btnIniciar = GameObject.Find ("btnIniciarSesion");
-		error = GameObject.Find ("Error").GetComponent<Text>();
 		//Ontiene el componente del objeto 
 		usuario = inputFieldU.GetComponent<InputField> ();
 		password = inputFieldP.GetComponent<InputField> ();
-        user = usuario.text;
-        pass = password.text;
+		fi.setUser(usuario.text);
+		fi.setPass(password.text);
     }
 	public void Login()
     {
@@ -58,6 +34,8 @@ public class login_registro : MonoBehaviour {
     }
 	private IEnumerator startPost(){
         //Recupera el text de los iInput Field y los guarda en variables
+		fi.setUser(usuario.text);
+		fi.setPass(password.text);
         user = usuario.text;
         pass = password.text;
         //Validacion de datos en el web service //?nombre=USER&contraPASS
@@ -73,9 +51,9 @@ public class login_registro : MonoBehaviour {
 				if (!json.Equals("[]")) {
 					CambiarEscena("menu");
 				} else {
-					error.text = "Usuario no encontrado";
+					error = GameObject.Find ("Error").GetComponent<Text> ();
+					error.text = "Usuario/Contraseña Incorrectos";
 					error.color = Color.red;
-					Debug.Log ("Usuario no encontrado");
 				}
 			}
 		}
@@ -86,6 +64,8 @@ public class login_registro : MonoBehaviour {
 		StartCoroutine ("startBusqueda");
 	}
 	private IEnumerator startBusqueda(){
+		fi.setUser(usuario.text);
+		fi.setPass(password.text);
 		user = usuario.text;
 		pass = password.text;
 		//Validacion de datos en el web service //?nombre=USER&contraPASS
