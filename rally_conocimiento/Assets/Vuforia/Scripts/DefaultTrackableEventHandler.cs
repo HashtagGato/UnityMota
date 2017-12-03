@@ -22,13 +22,13 @@ namespace Vuforia
 		private TrackableBehaviour mTrackableBehaviour;
 		private Canvas cResps, cPreg, cSig;
 		private string sName;
-		private sig_edificio sigEdif;
-		GameObject gameObjectScript, mov;
 		public  AudioClip a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21,a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40,a41, a42, a43, a44, a45, a46, a47, a48, a49, a50;
 		AudioClip[] audios;
 		public AudioSource fuente;
-		private inicioEscaneo iE;
+		private fin iE;
+		private inicioEscaneo preg;
 		private bool ban=false;
+		private int idPreg;
         #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -40,15 +40,14 @@ namespace Vuforia
 			fuente = GetComponent<AudioSource> ();
 			AudioClip[] auxAudios = {a1, a2,a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21,a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40,a41, a42, a43, a44, a45, a46, a47, a48, a49, a50};
 			audios = auxAudios;
-
-			mov = GameObject.Find ("ScriptMov");
-			iE = mov.GetComponent<inicioEscaneo> ();
-			gameObjectScript = GameObject.Find("script");
-			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
+			iE = GameObject.Find("scriptFin").GetComponent<fin> ();
+			preg = GameObject.Find("ScriptMov").GetComponent<inicioEscaneo> ();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
-			sName = "CanvasPreg"+mTrackableBehaviour.TrackableName;
+			sName = iE.getnEdificio ();
+			idPreg = (iE.getidPregunta ()-1);
+			Debug.Log (" pregunta "+idPreg);
 			cResps = GameObject.Find ("CanvasResp").GetComponent<Canvas> ();
-			cPreg = GameObject.Find (sName).GetComponent<Canvas> ();
+			cPreg = GameObject.Find ("CanvasPreg" + sName).GetComponent<Canvas> ();
 			cSig = GameObject.Find ("CanvasSiguiente").GetComponent<Canvas> ();
             if (mTrackableBehaviour)
             {
@@ -76,7 +75,6 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
 				OnTrackingFound ();
-				Debug.Log (" sig edi" + sigEdif.obtenerEd ());
             }
             else
             {
@@ -87,7 +85,7 @@ namespace Vuforia
 				if (!ban) {
 					ban = true;
 				} else {
-					fuente.clip = audios [(iE.getPreguntaID ()) - 1];
+					fuente.clip = audios [idPreg];
 					fuente.Stop ();
 				}
             }
@@ -116,11 +114,10 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
-			if (mTrackableBehaviour.TrackableName.Equals (sigEdif.obtenerEd ())) {
+			if (mTrackableBehaviour.TrackableName.Equals (sName)) {
 				cResps.enabled = true;
 				cPreg.enabled = true;
-				fuente.clip = audios [(iE.getPreguntaID ())-1];
-				Debug.Log ("El de ABAJO " + ((iE.getPreguntaID ())-1));
+				fuente.clip = audios [idPreg];
 				fuente.Play ();
 			}
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");

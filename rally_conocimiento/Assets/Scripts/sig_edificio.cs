@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class sig_edificio : MonoBehaviour {
-	GameObject A,AC,AF,AG,CH,D,F,H,J,K,L,P,PE,R,S2,S3,T,U,Y,Z;
 	Canvas  cMapa, cSig;
 	Text tAux;
 	int rutaAct;
@@ -14,24 +13,16 @@ public class sig_edificio : MonoBehaviour {
     private string idPartida;
     private string idUsuario;
     private string rutaRecorrer;
-    public string idEdificio;
+    public int idEdificio, numPregunta;
     public string edificio;
-    private Text letra;
+	private Text letra;
+	private int[] pasadas = new int[5];
     // //de alguna forma se debe sacar del web service un arreglo
 	//El web service regresa la ruta como el id del edificio, no la letra, ejemplo: "{6,2,1,5,4,1,7,9,8,5}"
 	string [] nEdificios = {"A","CH","D","F","H","J","K","L","P","R","S2","S3","T","U","Y","Z","AC","AF","AG","PE"};
-    private GameObject game_object;
-	fin button;
+	private fin button;
 
     // Use this for initialization
-    private void Awake()
-    {
-		button = GameObject.Find("scriptFin").GetComponent<fin>();
-        //ruta = button.rutaRecorrer;//toda la ruta obtenida cuando hace login, tenemos que ir 
-		idPartida = button.getIdPartida();
-		idUsuario = button.getidUsuario();
-        StartCoroutine("ObtainRuta");
-    }
     void Start () {
         Screen.orientation = ScreenOrientation.Landscape;
 		cMapa = GameObject.Find ("mapa").GetComponent<Canvas> ();//marca null
@@ -39,25 +30,24 @@ public class sig_edificio : MonoBehaviour {
 		letra = GameObject.Find("Edificio").GetComponent<Text>();
 		cSig.enabled = true;
 		cMapa.enabled = false;
+		button = GameObject.Find("scriptFin").GetComponent<fin>();
+		//ruta = button.rutaRecorrer;//toda la ruta obtenida cuando hace login, tenemos que ir 
+		idPartida = button.getIdPartida();
+		idUsuario = button.getidUsuario();
+		StartCoroutine("ObtainRuta");
 		//Poner los pines en el mapa
-
 		//En la siguiente escena se debe actualizar la ruta recorrida del ws
-		/*Checar la ruta recorrida, si esta ya tiene 10 puntos recorridos, 
-		no debe aparecer siguiente edificio, sino terminaste o su score
+		/*Checar la ruta recorrida, si esta ya tiene 10 puntos recorridos, no debe aparecer siguiente edificio, sino terminaste o su score
 		Definir que aparecera y poner aqui*/
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	public void BotonSalir(string scene)
 	{
 		SceneManager.LoadScene (scene);
 	}
 
 	public string obtenerEd(){
-		return nEdificios[(int.Parse(idEdificio))-1];
+		return nEdificios[idEdificio-1];
 	}
 
     private IEnumerator ObtainRuta()
@@ -74,29 +64,18 @@ public class sig_edificio : MonoBehaviour {
             if (rutaRecorrida[0].Equals(""))
             {
                 rutaRecorrer = json[9].Split('"')[1];
-				//string sigE= rutaCompleta[0].Split('"')[0];//Al no llevar ningun edificio recorrido, 
 				rutaAct = 0;
             }
             else
             {
                 rutaAct = rutaRecorrida.Length;
-
-                /*string tmp = "";
-                for (int i = recorridos; i < rutaCompleta.Length; i++)
-                {
-                    if (i < rutaCompleta.Length - 1)
-                    {
-                        tmp += rutaCompleta[i] + ",";
-                    }
-                    else
-                    {
-                        tmp += rutaCompleta[i];
-                    }
-                }
-                rutaRecorrer = tmp;*/
             }
-			idEdificio = rutaCompleta[rutaAct];
+			idEdificio = (int.Parse (rutaCompleta [rutaAct]));
+			button.setidEdificio (idEdificio);
 			letra.text = string.Concat ("Edificio ", obtenerEd ());
+			button.setnEdificio (obtenerEd ());
+			numPregunta = Obt_Pregunta ();
+			button.setidPregunta (numPregunta);
 			pines (rutaAct, rutaCompleta);
         }
         else
@@ -115,13 +94,25 @@ public class sig_edificio : MonoBehaviour {
 		}
 		if (posicion > 0){//Pinta los puntos recorridos
 			for (int i = 0; i < rutaAct; i++) {
-				Debug.Log (nEdificios [int.Parse (rutaTot [i]) - 1]);
 				Image aux = GameObject.Find (nEdificios[int.Parse(rutaTot[i])-1]).GetComponent<Image> ();
 				tAux = GameObject.Find ("Text" + nEdificios[int.Parse(rutaTot[i])-1]).GetComponent<Text> ();
 				tAux.text = (i+1).ToString ();
 				aux.enabled = true;
 			}
 		}
+	}
+	private int Obt_Pregunta(){
+		int p = UnityEngine.Random.Range (1,51);
+		if(p == pasadas[0] | p == pasadas[1] | p == pasadas[2] | p == pasadas[3] | p == pasadas[4]){
+			p = Obt_Pregunta();
+		}else{
+			pasadas [4] = pasadas [3];
+			pasadas [3] = pasadas [2];
+			pasadas [2] = pasadas [1];
+			pasadas [1] = pasadas [0];
+			pasadas [0] = p;
+		}
+		return p;
 	}
 }
 

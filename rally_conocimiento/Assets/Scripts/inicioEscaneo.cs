@@ -11,25 +11,21 @@ public class inicioEscaneo : MonoBehaviour{
 	GameObject but, gameObjectScript, haru;
 	/*Probando*/
 	private GameObject game_object;
-	fin button;
-	string rutaRecorrida;
-	string idEdificio;
-	private int[] pasadas = new int[5];
+	private fin button;
+	private string rutaRecorrida;
+	private string idEdificio;
 	/**/
 	private int puntaje;
 	private int pp;
 	private string idPartida;
 	private string idUsuario;
-
-	Canvas cbut;
+	private Canvas cbut;
 	private Text tPreg, tResp1, tResp2, tResp3, tResp4;
-	string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
-	string[] btnsResps = {"A","B","C","D"};
-    private int numPregunta;
-	Animator anim;
-	Canvas cSig, cResps;
-	int resp;
-    private sig_edificio sigEdif;
+	private string [] nEdificios = {"A","AC","AF","AG","CH","D","F","H","J","K","L","P","PE","R","S2","S3","T","U","Y","Z"};
+	private string[] btnsResps = {"A","B","C","D"};
+	private Animator anim;
+	private Canvas cSig, cResps;
+	private int resp;
 	public AudioSource fuente;
 	public AudioClip correcto, incorrecto;
 	private fin fi;
@@ -37,38 +33,31 @@ public class inicioEscaneo : MonoBehaviour{
 	// Use this for initialization
 	void Start () {
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
-		fuente = GetComponent<AudioSource> ();
-        StartCoroutine("startPregunta");
+		fuente = GetComponent<AudioSource> ();	
+		fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
+		StartCoroutine("startPregunta");
 	}
 
     private IEnumerator startPregunta()
     {
-		numPregunta = Obt_Pregunta ();//Obtenemos un numero aleatorio para la pregunta
-		string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/",numPregunta);
-
+		//Obtenemos un numero aleatorio para la pregunta
+		string url = string.Concat("http://www.artashadow.xyz/index.php/getPregunta/",fi.getidPregunta());
         WWW www = new WWW(url);
         yield return www;
         if (www.error == null)
         {
             string json = www.text.Replace("\"", ""); //json obtenido desde el WS
-                          
             string[] json_array = json.Split(':');
-
-            gameObjectScript = GameObject.Find("script");
-			sigEdif = gameObjectScript.GetComponent<sig_edificio>();
 			/*********recuperar el id de la partida**********/
-			fi = GameObject.Find ("scriptFin").GetComponent<fin> ();
 			idPartida = fi.getIdPartida();
 			/******************/
-			string ed = sigEdif.obtenerEd ();
-			string nEdificio = ed;//id? del edificio que regresa el web service.
-			idEdificio = sigEdif.idEdificio;
+			string nEdificio = fi.getnEdificio ();//id? del edificio que regresa el web service.
+			idEdificio = fi.getidEdificio().ToString();
 			but = GameObject.Find("CanvasResp");
             cbut = but.GetComponent<Canvas>();
 			for (int i = 0; i < nEdificios.Length; i++) {
 				if (!nEdificio.Equals (nEdificios [i])) {
 					GameObject.Find ("ImageTarget" + nEdificios[i]).SetActive (false);
-
 				}
 			}
             tPreg = GameObject.Find("preguntaText" + nEdificio).GetComponent<Text>();
@@ -108,6 +97,9 @@ public class inicioEscaneo : MonoBehaviour{
 			cResps.enabled = false;
 			cSig.enabled = true;
 			pp = 1;
+			if (fuente.isPlaying) {
+				fuente.Stop ();
+			}
 			fuente.clip = correcto;
 			fuente.Play ();
 		} else {
@@ -115,6 +107,9 @@ public class inicioEscaneo : MonoBehaviour{
 			anim.Play ("kick");
 			cResps.enabled = false;
 			cSig.enabled = true;
+			if (fuente.isPlaying) {
+				fuente.Stop ();
+			}
 			fuente.clip = incorrecto;
 			fuente.Play ();
 			pp = 0;
@@ -199,21 +194,4 @@ public class inicioEscaneo : MonoBehaviour{
 			
 		}
 	}
-	private int Obt_Pregunta(){
-		int p = UnityEngine.Random.Range (1,51);
-		if(p == pasadas[0] | p == pasadas[1] | p == pasadas[2] | p == pasadas[3] | p == pasadas[4]){
-			p = Obt_Pregunta();
-		}else{
-			pasadas [4] = pasadas [3];
-			pasadas [3] = pasadas [2];
-			pasadas [2] = pasadas [1];
-			pasadas [1] = pasadas [0];
-			pasadas [0] = p;
-		}
-		return p;
-	}
-	public int getPreguntaID(){
-		return numPregunta;
-	}
-
 }
